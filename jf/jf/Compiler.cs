@@ -20,16 +20,19 @@ namespace jf
             }
         }
 
-        public List<Token> tokens;
-        public List<String> lines;
-        public Explanation e = new Explanation();
+        private List<Token> tokens;
+        private List<String> lines;
+        private Explanation explanationSymbolTable = new Explanation();
+        private Performable performableSymboltTable = new Performable();
 
         public Compiler()
         {
+            int startOfPerformable;
             this.tokens = new List<Token>();
             this.lines = new List<String>();
             this.lineizer("example.txt");
-            this.fillExplanation();
+            startOfPerformable = this.fillExplanation();
+            this.fillPerformable(startOfPerformable);
         }
 
         public string[] tokenizer(string line)
@@ -39,7 +42,7 @@ namespace jf
             result[0] = words[0];
             for(int i=1; i < words.Length; i++)
             {
-                result[1] += words[i] + " ";
+                result[1] += words[i].Trim();
             }
             return result;
         } 
@@ -158,23 +161,90 @@ namespace jf
             }
         }
 
-        public void fillExplanation()
+        public int fillPerformable(int startLineNumber)
         {
+            List<Node> stack = new List<Node>();
+            Node current = null;
+            bool isEnded = false;
+            string firstLine = this.lines[startLineNumber];
+            string[] result = this.tokenizer(firstLine);
+            this.performableSymboltTable.root = new Node(result[0], result[1]);
+            stack.Add(this.performableSymboltTable.root);
+            for(int i = startLineNumber+1; i < this.lines.Count; i++)
+            {
+                string line = this.lines[i];
+                result = this.tokenizer(line);
+                if(result[0].ToLower() != "loop" && result[0].ToLower() != "if")
+                {
+                    current = new Node(result[0], result[1]);
+                    current.parent = stack[stack.Count - 1];
+                    stack[stack.Count - 1].child.Add(current);
+                } else if(result[0].ToLower() == "loop" || result[0].ToLower() == "if")
+                {
+                    current = new Node(result[0], result[1]);
+                    current.parent = stack[stack.Count - 1];
+                    stack[stack.Count - 1].child.Add(current);
+                    stack.Add(current);
+                } else if(result[0].ToLower() == "lend" || result[0].ToLower() == "endif")
+                {
+                    // error -1 is = start and end block is not equal
+                    if(result[0].ToLower() != stack[stack.Count - 1].identifier)
+                    {
+                        return -1;
+                    }
+
+                    // error -2 = extra end of block
+                    if(stack[stack.Count - 1] == this.performableSymboltTable.root)
+                    {
+                        return -2;
+                    }
+                    stack.RemoveAt(stack.Count - 1);
+                    current = new Node(result[0], result[1]);
+                    current.parent = stack[stack.Count - 1];
+                    stack[stack.Count - 1].child.Add(current);
+
+                } else if(result[0].ToLower() == "end")
+                {
+                    // error -3 = block started but it not ended
+                    if (stack[stack.Count - 1] == this.performableSymboltTable.root)
+                    {
+                        return -3;
+                    }
+                    break;
+                }
+                if (i == this.lines.Count - 1) isEnded = true;
+            }
+
+            // error -4 = there is other lines after 'end'
+            if (isEnded == false) return -4;
+            return 1;
+        }
+
+        /*
+         * fill Eplanation symbol table, its iterate lines till see "begin"
+         * return : type = int, mean = begin line number of performable section
+         */
+
+        public int fillExplanation()
+        {
+            int lineCounter = 0;
             foreach(var line in this.lines)
             {
                 if (line.ToLower().Equals("begin"))
                 {
-                    break;
+                    return lineCounter;
                 }
                 string[] restlt = this.tokenizer(line);
-                this.e.st.insert(restlt[0], restlt[1]);
+                this.explanationSymbolTable.st.insert(restlt[0], restlt[1]);
+                lineCounter++;
             }
+            return -1;
         }
 
 
         static void Main(string[] args)
         {
-            int counter = 0;
+            //int counter = 0;
             Compiler c = new Compiler();
             SymbolTable s = new SymbolTable();
             /*foreach(var token in c.tokens)
@@ -188,10 +258,16 @@ namespace jf
             {
                 Console.WriteLine(line);
             }*/
-            foreach(var temp in c.e.st.table)
+            /*foreach(var temp in c.explanationSymbolTable.st.table)
             {
-                Console.WriteLine(String.Format("identifier name is {0} and its attribute is {1}", temp[0], temp[1]));
-            }
+                Console.WriteLine(String.Format("identifier name is ''{0}'' and its attribute is ''{1}''", temp[0], temp[1]));
+            }*/
+            /*Console.WriteLine(c.performableSymboltTable.root.identifier);
+            Console.WriteLine(c.performableSymboltTable.root.attribute);*/
+            /*Console.WriteLine(c.performableSymboltTable.root.identifier);
+            Console.WriteLine(c.performableSymboltTable.root.child[0].identifier);
+            Console.WriteLine(c.performableSymboltTable.root.child[1].identifier);*/
+            Node.printTree(c.performableSymboltTable.root);
             Console.ReadLine();
         }
     }

@@ -8,9 +8,10 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>jf</RootNamespace>
     <AssemblyName>jf</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,7 +35,12 @@
   <ItemGroup>
     <Compile Include="Compiler.cs" />
     <Compile Include="Explanation.cs" />
+    <Compile Include="Node.cs" />
+    <Compile Include="Performable.cs" />
     <Compile Include="SymbolTable.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
