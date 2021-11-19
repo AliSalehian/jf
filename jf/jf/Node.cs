@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Collections;
 
 namespace jf
 {
@@ -21,43 +21,47 @@ namespace jf
 
         public static void printTree(Node root)
         {
-            List<Node> stack = new List<Node>();
-            List<int> indexStack = new List<int>();
+            Stack parentStack =  new Stack();
+            Stack parentIndexStack = new Stack();
             Node current = null;
             int index;
-            indexStack.Add(0);
-            stack.Add(root);
+            parentIndexStack.Push(0);
+            parentStack.Push(root);
             Console.WriteLine("root of tree is {0} | {1}", root.identifier, root.attribute);
             while (true)
             {
-                index = indexStack[indexStack.Count - 1];
-                if (index > stack[stack.Count - 1].child.Count-1)
+                index = (int)parentIndexStack.Peek();
+                Node temp = (Node)parentStack.Peek();
+                if (index > temp.child.Count-1)
                 {
                     break;
                 }
-                current = stack[stack.Count - 1].child[index];
+                current = temp.child[index];
                 Console.WriteLine("node number {0} is {1} | {2}", index, current.identifier, current.attribute);
                 if(current.child.Count > 0)
                 {
-                    stack.Add(current);
-                    indexStack.Add(0);
+                    parentStack.Push(current);
+                    parentIndexStack.Push(0);
                     continue;
                 }
-                if(index + 1 < stack[stack.Count - 1].child.Count)
+                if(index + 1 < temp.child.Count)
                 {
                     index++;
-                    indexStack[indexStack.Count - 1]++;
+                    parentIndexStack.Pop();
+                    parentIndexStack.Push(index);
                     continue;
                 }
                 else
                 {
-                    if(stack[stack.Count - 1] == root)
+                    if(temp == root)
                     {
                         break;
                     }
-                    stack.RemoveAt(stack.Count - 1);
-                    indexStack.RemoveAt(indexStack.Count - 1);
-                    indexStack[indexStack.Count - 1]++;
+                    int tempIndex = (int)parentIndexStack.Pop();
+                    tempIndex++;
+                    parentStack.Pop();
+                    parentIndexStack.Pop();
+                    parentIndexStack.Push(tempIndex);
                 }
             }
         }
