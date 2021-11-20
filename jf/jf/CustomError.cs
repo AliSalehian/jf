@@ -15,5 +15,15 @@ namespace jf
             this.lineNumber = lineNumber;
             this.message = message;
         }
+
+        public int getLineNumber()
+        {
+            return lineNumber;
+        }
+
+        public string getMessage()
+        {
+            return message;
+        }
     }
 }

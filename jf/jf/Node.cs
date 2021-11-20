@@ -21,6 +21,7 @@ namespace jf
 
         public static void printTree(Node root)
         {
+            if(root == null) return;
             Stack parentStack =  new Stack();
             Stack parentIndexStack = new Stack();
             Node current = null;
