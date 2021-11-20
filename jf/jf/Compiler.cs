@@ -24,6 +24,7 @@ namespace jf
         private readonly List<Token> tokens;
         private readonly List<string> lines;
         private readonly List<Tuple<int, string>> realLines;
+        private readonly List<Tuple<string, double>> variables;
         private readonly Explanation explanationSymbolTable = new Explanation();
         private readonly Performable performableSymboltTable = new Performable();
         private readonly List<CustomError> errors;
@@ -42,7 +43,12 @@ namespace jf
             {10, "data values should be number"},
             {11, "BEGIN should not have value"},
             {12, "there is no END in this code"},
-            {13, "END should not have value"}
+            {13, "END should not have value"},
+            {14, "VAR has extra value"},
+            {15, "VAR name should be start with letter"},
+            {16, "VAR value should be number"},
+            {17, "READ need a value"},
+            {18, "this value is not defined"}
         };
 
         public Compiler()
@@ -51,7 +57,8 @@ namespace jf
             this.tokens = new List<Token>();
             this.lines = new List<String>();
             this.realLines = new List<Tuple<int, string>>();
-            this.errors = new List<CustomError>();    
+            this.errors = new List<CustomError>();
+            this.variables = new List<Tuple<string, double>>();
             this.Lineizer("example.txt");
             startOfPerformable = this.FillExplanation();
             this.FillPerformable(startOfPerformable);
@@ -188,6 +195,108 @@ namespace jf
             }
         }
 
+        private void chechForError(string[] identifierAndAttribute, bool isPerformable, int lineNumber)
+        {
+            if (!isPerformable)
+            {
+                switch (identifierAndAttribute[0].ToLower())
+                {
+                    case "mode":
+                        if (identifierAndAttribute[1] != "0" && identifierAndAttribute[1] != "1")
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[6]));
+                        }
+                        break;
+                    case "r0":
+                        double number;
+                        if (double.TryParse(identifierAndAttribute[1], out number) == false)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[7]));
+                        }
+                        break;
+                    case "i":
+                        if (double.TryParse(identifierAndAttribute[1], out number) == false)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[8]));
+                        }
+                        break;
+                    case "kmu":
+                        if (double.TryParse(identifierAndAttribute[1], out number) == false)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[9]));
+                        }
+                        break;
+                    case "data":
+                        string[] temp = identifierAndAttribute[1].Split(',');
+                        foreach (string s in temp)
+                        {
+                            if (double.TryParse(s, out number) == false)
+                            {
+                                if (this.allErrorsText.ContainsKey(10) == false)
+                                {
+                                    this.allErrorsText.Add(10, String.Format("'{0}' value is not number in data, its should be number", s));
+                                }
+                                else
+                                {
+                                    this.allErrorsText[10] = String.Format("'{0}' value is not number in data, its should be number", s);
+                                }
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[10]));
+                            }
+                        }
+                        break;
+                    case "begin":
+                        this.errors.Add(new CustomError(lineNumber, this.allErrorsText[11]));
+                        break;
+                }
+            }
+            else
+            {
+                switch (identifierAndAttribute[0].ToLower()){
+                    case "var":
+                        string[] temp = identifierAndAttribute[1].Split(',');
+                        if (temp.Length > 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[14]));
+                            break;
+                        }
+                        if (!Char.IsLetter(temp[0][0]))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[15]));
+                            break;
+                        }
+                        double number;
+                        if (double.TryParse(temp[1], out number) == false)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[16]));
+                            break;
+                        }
+                        this.variables.Add(Tuple.Create(temp[0], double.Parse(temp[1])));
+                        break;
+                    case "read":
+                        if (identifierAndAttribute.Length == 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[17]));
+                            break;
+                        }
+                        bool isItInDefined = false;
+                        foreach (Tuple<string, double> t in this.variables)
+                        {
+                            if (t.Item1 == identifierAndAttribute[1])
+                            {
+                                isItInDefined = true;
+                                break;
+                            }
+                        }
+                        if (isItInDefined == false)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[18]));
+                            break;
+                        }
+                        break;
+                }
+            }
+        }
+
         public void FillPerformable(Tuple<int, int> startLineNumber)
         {
             if (startLineNumber == null || startLineNumber.Item1 < 0)
@@ -209,6 +318,7 @@ namespace jf
                     continue;
                 }
                 result = this.Tokenizer(line);
+                this.chechForError(result, true, i);
                 Node current;
                 if (result[0].ToLower() != "loop" && result[0].ToLower() != "if" && result[0].ToLower() != "lend" && result[0].ToLower() != "endif")
                 {
@@ -281,7 +391,7 @@ namespace jf
                 this.errors.Add(new CustomError(i, this.allErrorsText[12]));
             }
 
-            if(lastLine[1].Length > 0)
+            if(lastLine.Length > 0)
             {
                 this.errors.Add(new CustomError(i, this.allErrorsText[13]));
             }
@@ -307,54 +417,9 @@ namespace jf
                 {
                     return Tuple.Create(realLineCounter, lineCounter);
                 }
-                string[] restlt = this.Tokenizer(line.Item2);
-                switch (restlt[0].ToLower())
-                {
-                    case "mode":
-                        if (restlt[1] != "0" && restlt[1] != "1")
-                        {
-                            this.errors.Add(new CustomError(realLineCounter, this.allErrorsText[6]));
-                        }
-                        break;
-                    case "r0":
-                        double number;
-                        if (double.TryParse(restlt[1], out number) == false){
-                            this.errors.Add(new CustomError(realLineCounter, this.allErrorsText[7]));
-                        }
-                        break;
-                    case "i":
-                        if (double.TryParse(restlt[1], out number) == false){
-                            this.errors.Add(new CustomError(realLineCounter, this.allErrorsText[8]));
-                        }
-                        break;
-                    case "kmu":
-                        if (double.TryParse(restlt[1], out number) == false){
-                            this.errors.Add(new CustomError(realLineCounter, this.allErrorsText[9]));
-                        }
-                        break;
-                    case "data":
-                        string[] temp = restlt[1].Split(',');
-                        foreach(string s in temp)
-                        {
-                            if (double.TryParse(s, out number) == false)
-                            {
-                                if (this.allErrorsText.ContainsKey(10) == false)
-                                {
-                                    this.allErrorsText.Add(10, String.Format("'{0}' value is not number in data, its should be number", s));
-                                }
-                                else
-                                {
-                                    this.allErrorsText[10] = String.Format("'{0}' value is not number in data, its should be number", s);
-                                }
-                                this.errors.Add(new CustomError(realLineCounter, this.allErrorsText[10]));
-                            }
-                        }
-                        break;
-                    case "begin":
-                        this.errors.Add(new CustomError(realLineCounter, this.allErrorsText[11]));
-                        break;
-                }
-                this.explanationSymbolTable.st.insert(restlt[0], restlt[1]);
+                string[] result = this.Tokenizer(line.Item2);
+                this.chechForError(result, false, realLineCounter);
+                this.explanationSymbolTable.st.insert(result[0], result[1]);
                 lineCounter++;
                 realLineCounter++;
             }
