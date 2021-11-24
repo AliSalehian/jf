@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using System.Windows.Forms;
 
 namespace jf
 {
@@ -48,7 +49,10 @@ namespace jf
             {15, "VAR name should be start with letter"},
             {16, "VAR value should be number"},
             {17, "READ need a value"},
-            {18, "this value is not defined"}
+            {18, "this value is not defined"},
+            {19, "RESTORE has no attribute"},
+            {20, "SET value sould be 'pp' or 'pm'"},
+            {100, "too many attribute"}
         };
 
         public Compiler()
@@ -206,6 +210,10 @@ namespace jf
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[6]));
                         }
+                        if(identifierAndAttribute.Length > 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                        }
                         break;
                     case "r0":
                         double number;
@@ -213,17 +221,29 @@ namespace jf
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[7]));
                         }
+                        if (identifierAndAttribute.Length > 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                        }
                         break;
                     case "i":
                         if (double.TryParse(identifierAndAttribute[1], out number) == false)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[8]));
                         }
+                        if (identifierAndAttribute.Length > 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                        }
                         break;
                     case "kmu":
                         if (double.TryParse(identifierAndAttribute[1], out number) == false)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[9]));
+                        }
+                        if (identifierAndAttribute.Length > 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
                         }
                         break;
                     case "data":
@@ -291,6 +311,71 @@ namespace jf
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[18]));
                             break;
+                        }
+                        break;
+                    case "restore":
+                        if (identifierAndAttribute.Length > 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[19]));
+                        }
+                        break;
+                    case "add":
+                        temp = identifierAndAttribute[1].Split(',');
+                        if (!Char.IsLetter(temp[0][0]))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[15]));
+                            break;
+                        }
+                        isItInDefined = false;
+                        foreach (Tuple<string, double> t in this.variables)
+                        {
+                            if (t.Item1 == temp[0])
+                            {
+                                isItInDefined = true;
+                                break;
+                            }
+                        }
+                        if (isItInDefined == false)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[18]));
+                            break;
+                        }
+                        if (!Char.IsLetter(temp[1][0]))
+                        {
+                            if (double.TryParse(temp[1], out number) == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[16]));
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            isItInDefined = false;
+                            foreach (Tuple<string, double> t in this.variables)
+                            {
+                                if (t.Item1 == temp[1])
+                                {
+                                    isItInDefined = true;
+                                    break;
+                                }
+                            }
+                            if (isItInDefined == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[18]));
+                                break;
+                            }
+                        }
+                        break;
+                    case "set":
+                        if(identifierAndAttribute[1].ToLower() != "pp" && identifierAndAttribute[1].ToLower() != "pm")
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[20]));
+                        }
+                        break;
+                    case "speed":
+                        if (!Char.IsLetter(identifierAndAttribute[1][0]))
+                        {
+
                         }
                         break;
                 }
@@ -480,7 +565,8 @@ namespace jf
             //int counter = 0;
             Compiler c = new Compiler();
             SymbolTable s = new SymbolTable();
-            Compiler.Print(c);
+            //Compiler.Print(c);
+            Application.Run(new Main());
 
             /*Console.WriteLine(c.performableSymboltTable.root.identifier);
             Console.WriteLine(c.performableSymboltTable.root.child[0].identifier);
