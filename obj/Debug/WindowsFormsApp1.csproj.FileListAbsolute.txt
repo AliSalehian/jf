@@ -1,0 +1,20 @@
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Erfan\Desktop\dynanometer\dynamometer\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.exe
+D:\work\jf\code\version 0.0.1\obj\Debug\WindowsFormsApp1.pdb
+D:\work\jf\code\version 0.0.1\bin\Debug\WindowsFormsApp1.exe.config
+D:\work\jf\code\version 0.0.1\bin\Debug\WindowsFormsApp1.exe
+D:\work\jf\code\version 0.0.1\bin\Debug\WindowsFormsApp1.pdb

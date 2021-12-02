@@ -1,0 +1,31 @@
+JF122
+
+
+code  Name:     Burnish test 
+CODE No.    : 18 75 034524850 - Peugeut 
+CODE Factory Name : Toklantoos
+CODE Type         : Peugeut 405
+CODE Standard     : AK1 , AK2
+MODE 2
+
+
+R0  0.294
+i 40.24
+Kmu 1
+data 4, 5, 6
+data 100 ,200, 300
+BEGIN
+VAR a, 2
+
+                SET Pp
+	turn 1
+                FAN 50
+	 LOOP 100
+	    speed 10 ,c
+             wait t3<=100
+	     SPEED 80
+                    BRAKE  p=3  ,UNTIL n<=270 ,r
+	   LEND
+            turn 1
+VAR b, 3
+END dfsd
