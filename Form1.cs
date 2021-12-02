@@ -14,6 +14,7 @@ namespace WindowsFormsApp1
     {
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
         jf.Compiler compiler = new jf.Compiler();
+        //jf.Runner runner = new jf.Runner();
 
         public Form1()
         {
@@ -133,6 +134,10 @@ namespace WindowsFormsApp1
                 } 
                 richTextBox1.AppendText(test[i].Item1 + "   " + value + "\n");
             }
+            richTextBox1.AppendText("###############################\n");
+            //runner.run();
+            //string test2 = runner.run(compiler);
+            //richTextBox1.AppendText(test2);
             chart1.Width = richTextBox1.Width;
             chart1.Height = richTextBox1.Width;
             chart1.Location = new Point(500, 370);
