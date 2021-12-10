@@ -44,13 +44,24 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void WriteFromCompilerToRichTextBox(RichTextBox rtb, List<Tuple<int, string>> lines)
+        public void WriteFromCompilerToRichTextBox(RichTextBox rtb, List<Tuple<int, string>> lines, int lineNumber)
         {
             foreach (Tuple<int, string> line in lines)
             {
                 rtb.AppendText(line.Item1.ToString() + "    ");
                 rtb.AppendText(line.Item2);
                 rtb.AppendText(Environment.NewLine);
+                lineNumber++;
+                /*
+                int start = rtb.GetFirstCharIndexFromLine(lineNumber - 1);
+                int length = rtb.Lines[lineNumber - 1].Length;
+                rtb.Select(start, length);
+                rtb.SelectionBackColor = Color.White;
+
+                start = rtb.GetFirstCharIndexFromLine(lineNumber);
+                length = rtb.Lines[lineNumber].Length;
+                rtb.Select(start, length);
+                rtb.SelectionBackColor = Color.FromArgb(0x4c, 0xe6, 0x00);*/
             }
         }
     }

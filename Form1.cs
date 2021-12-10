@@ -12,12 +12,18 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        jf.Compiler compiler;
+        Queue<string> commandsQueue;
+        System.Threading.Thread t;
+        int lineNumber = 0;
+        //jf.Compiler compiler = new jf.Compiler();
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
-        jf.Compiler compiler = new jf.Compiler();
         //jf.Runner runner = new jf.Runner();
 
-        public Form1()
+        public Form1(Object compiler, Queue<string> commandsQueue)
         {
+            this.compiler = (jf.Compiler) compiler;
+            this.commandsQueue = commandsQueue;
             InitializeComponent();
         }
 
@@ -119,10 +125,18 @@ namespace WindowsFormsApp1
             panel1.Location = new Point(0, 370);
             panel2.Location = new Point(0, 370);
             panel2.Height = (this.Height / 2) - 20;
+            panel3.Location = new Point(0, 25);
             richTextBox1.ReadOnly = true;
-            richTextBox1.Width = this.Width / 2;
-            rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine());
+            richTextBox1.Width = (ClientSize.Width-90) / 2;
+            chart1.Width = richTextBox1.Width;
+            chart1.Height = richTextBox1.Height;
+            label1.Text = chart1.Height.ToString();
+            label2.Text = richTextBox1.Height.ToString();
+            chart1.Left = richTextBox1.Width+60;
+            richTextBox1.Left = 30;
+            rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine(), lineNumber);
             richTextBox1.AppendText("###############################\n");
+            lineNumber++;
             List < Tuple<string, List<double>> > test = compiler.getConstants();
             string value = "";
             for (int i=0; i < test.Count; i++)
@@ -133,20 +147,59 @@ namespace WindowsFormsApp1
                     value += d.ToString() + " ";
                 } 
                 richTextBox1.AppendText(test[i].Item1 + "   " + value + "\n");
+                lineNumber++;
             }
             richTextBox1.AppendText("###############################\n");
-            //runner.run();
-            //string test2 = runner.run(compiler);
-            //richTextBox1.AppendText(test2);
-            chart1.Width = richTextBox1.Width;
-            chart1.Height = richTextBox1.Width;
-            chart1.Location = new Point(500, 370);
+            lineNumber++;
+            panel3.Left = (ClientSize.Width - panel3.Width) / 2;
+            t = new System.Threading.Thread(ReadCommands);
+            t.Start();
+        }
 
+        private void ReadCommands()
+        {
+            while (true)
+            {
+                if(commandsQueue.Count > 0)
+                {
+                    MethodInvoker mi = delegate () { 
+                        richTextBox1.AppendText(commandsQueue.Dequeue());
+
+                        //int start = richTextBox1.GetFirstCharIndexFromLine(lineNumber-1);
+                        //int length = richTextBox1.Lines[lineNumber-1].Length;
+                        //richTextBox1.Select(start, length);
+                        //richTextBox1.SelectionBackColor = Color.White;
+
+                        //start = richTextBox1.GetFirstCharIndexFromLine(lineNumber);
+                        //length = richTextBox1.Lines[lineNumber].Length;
+                       // richTextBox1.Select(start, length);
+                        //richTextBox1.SelectionBackColor = Color.FromArgb(0x4c, 0xe6, 0x00);
+                        //lineNumber++;
+                    };
+                    this.Invoke(mi);
+                    
+                }
+            }
         }
 
         private void End_Click(object sender, EventArgs e)
         {
             System.Environment.Exit(0);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

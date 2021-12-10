@@ -69,6 +69,11 @@ namespace jf
             this.FillPerformable(startOfPerformable);
         }
 
+        public Node getPerformableTableRoot()
+        {
+            return this.performableSymboltTable.root;
+        }
+
         public List<Tuple<int, string>> getRealLine()
         {
             return this.realLines;
@@ -420,11 +425,12 @@ namespace jf
                 this.errors.Add(new CustomError(startLineNumber.Item1, this.allErrorsText[5]));
             }
             int i;
+            int realLineCounter = startLineNumber.Item1;
             Stack parentStack = new Stack();
             bool isEnded = false;
             string firstLine = this.realLines[startLineNumber.Item1].Item2;
             string[] result = this.Tokenizer(firstLine);
-            this.performableSymboltTable.root = new Node(result[0], result[1]);
+            this.performableSymboltTable.root = new Node(result[0], result[1], realLineCounter);
             parentStack.Push(this.performableSymboltTable.root);
             for(i = startLineNumber.Item1 + 1; i < this.realLines.Count; i++)
             {
@@ -438,7 +444,7 @@ namespace jf
                 Node current;
                 if (result[0].ToLower() != "loop" && result[0].ToLower() != "if" && result[0].ToLower() != "lend" && result[0].ToLower() != "endif")
                 {
-                    current = new Node(result[0], result[1])
+                    current = new Node(result[0], result[1], i)
                     {
                         parent = (Node)parentStack.Peek()
                     };
@@ -448,7 +454,7 @@ namespace jf
                 }
                 else if (result[0].ToLower() == "loop" || result[0].ToLower() == "if")
                 {
-                    current = new Node(result[0], result[1])
+                    current = new Node(result[0], result[1], i)
                     {
                         parent = (Node)parentStack.Peek()
                     };
@@ -475,7 +481,7 @@ namespace jf
 
                         this.errors.Add(new CustomError(i, this.allErrorsText[2]));
                     }
-                    current = new Node(result[0], result[1])
+                    current = new Node(result[0], result[1], i)
                     {
                         parent = (Node)parentStack.Peek()
                     };

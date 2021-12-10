@@ -7,15 +7,17 @@ using System.Threading;
 
 namespace WindowsFormsApp1
 {
-    static class Program
+    class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        static jf.Compiler compiler = new jf.Compiler();
+        static Queue<string> queue = new Queue<string>();
         [STAThread]
         static void Main()
         {
-            jf.Runner runner = new jf.Runner();
+            jf.Runner runner = new jf.Runner(Program.compiler, Program.queue);
 
             Thread backendThread = new Thread(new ThreadStart(runner.run));
             backendThread.Start();
@@ -30,7 +32,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Form1(Program.compiler, Program.queue));
         }
     }
 }
