@@ -13,17 +13,16 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         jf.Compiler compiler;
-        Queue<string> commandsQueue;
+        Queue<jf.Command> commands;
         System.Threading.Thread t;
-        int lineNumber = 0;
         //jf.Compiler compiler = new jf.Compiler();
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
         //jf.Runner runner = new jf.Runner();
 
-        public Form1(Object compiler, Queue<string> commandsQueue)
+        public Form1(Object compiler, Object commands)
         {
             this.compiler = (jf.Compiler) compiler;
-            this.commandsQueue = commandsQueue;
+            this.commands = (Queue<jf.Command>) commands;
             InitializeComponent();
         }
 
@@ -134,9 +133,8 @@ namespace WindowsFormsApp1
             label2.Text = richTextBox1.Height.ToString();
             chart1.Left = richTextBox1.Width+60;
             richTextBox1.Left = 30;
-            rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine(), lineNumber);
+            rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine());
             richTextBox1.AppendText("###############################\n");
-            lineNumber++;
             List < Tuple<string, List<double>> > test = compiler.getConstants();
             string value = "";
             for (int i=0; i < test.Count; i++)
@@ -147,10 +145,8 @@ namespace WindowsFormsApp1
                     value += d.ToString() + " ";
                 } 
                 richTextBox1.AppendText(test[i].Item1 + "   " + value + "\n");
-                lineNumber++;
             }
             richTextBox1.AppendText("###############################\n");
-            lineNumber++;
             panel3.Left = (ClientSize.Width - panel3.Width) / 2;
             t = new System.Threading.Thread(ReadCommands);
             t.Start();
@@ -158,27 +154,53 @@ namespace WindowsFormsApp1
 
         private void ReadCommands()
         {
+            int counter = 0;
             while (true)
             {
-                if(commandsQueue.Count > 0)
+                MethodInvoker mi = delegate ()
                 {
-                    MethodInvoker mi = delegate () { 
-                        richTextBox1.AppendText(commandsQueue.Dequeue());
+                    if (commands.Count > 0)
+                    {
+                        jf.Command c = this.commands.Dequeue();
+                        if (c.getType() == "highlight")
+                        {
+                            int CommandlineNumber = c.getLineNumber();
+                            int start, length;
+                            if (CommandlineNumber > 0)
+                            {
+                                start = richTextBox1.GetFirstCharIndexFromLine(CommandlineNumber - 1);
+                                length = richTextBox1.Lines[CommandlineNumber - 1].Length;
+                            }
+                            else
+                            {
+                                start = richTextBox1.GetFirstCharIndexFromLine(0);
+                                length = richTextBox1.Lines[0].Length;
+                            }
+                            richTextBox1.Select(start, length);
+                            richTextBox1.SelectionBackColor = Color.White;
 
-                        //int start = richTextBox1.GetFirstCharIndexFromLine(lineNumber-1);
-                        //int length = richTextBox1.Lines[lineNumber-1].Length;
-                        //richTextBox1.Select(start, length);
-                        //richTextBox1.SelectionBackColor = Color.White;
+                            start = 0;
+                            length = richTextBox1.Lines[0].Length;
+                            richTextBox1.Select(start, length);
+                            richTextBox1.SelectionBackColor = Color.White;
 
-                        //start = richTextBox1.GetFirstCharIndexFromLine(lineNumber);
-                        //length = richTextBox1.Lines[lineNumber].Length;
-                       // richTextBox1.Select(start, length);
-                        //richTextBox1.SelectionBackColor = Color.FromArgb(0x4c, 0xe6, 0x00);
-                        //lineNumber++;
-                    };
-                    this.Invoke(mi);
-                    
-                }
+                            start = richTextBox1.GetFirstCharIndexFromLine(CommandlineNumber);
+                            length = richTextBox1.Lines[CommandlineNumber].Length;
+                            richTextBox1.Select(start, length);
+                            string pastText = richTextBox1.SelectedText;
+                            string change = pastText.Split(' ')[0];
+                            richTextBox1.SelectedText = pastText.Replace(change, Encoding.UTF8.GetString(Encoding.Convert(Encoding.Unicode, Encoding.UTF8, Encoding.Unicode.GetBytes("\u2705"))));
+                            richTextBox1.Select(start, length);
+                            richTextBox1.SelectionBackColor = c.getBgColor();
+                            counter++;
+                        }
+                        if(c.getType() == "test")
+                        {
+                            richTextBox1.AppendText(c.getNewLine());
+                        }
+                    }
+                };
+                this.Invoke(mi);
             }
         }
 

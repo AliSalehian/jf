@@ -13,11 +13,11 @@ namespace WindowsFormsApp1
         /// The main entry point for the application.
         /// </summary>
         static jf.Compiler compiler = new jf.Compiler();
-        static Queue<string> queue = new Queue<string>();
+        static Queue<jf.Command> queue = new Queue<jf.Command>();
         [STAThread]
         static void Main()
         {
-            jf.Runner runner = new jf.Runner(Program.compiler, Program.queue);
+            jf.Runner runner = new jf.Runner(Program.compiler, queue);
 
             Thread backendThread = new Thread(new ThreadStart(runner.run));
             backendThread.Start();
@@ -32,7 +32,7 @@ namespace WindowsFormsApp1
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(Program.compiler, Program.queue));
+            Application.Run(new Form1(Program.compiler, queue));
         }
     }
 }

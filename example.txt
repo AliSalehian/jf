@@ -12,9 +12,12 @@ MODE 2
 R0  0.294
 i 40.24
 Kmu 1
-data 4, 5, 6
+data 4444, 5, 6
 BEGIN
 VAR a, 2
+VAR b, 4
+ADD a, 1
+ADD a, b
 
                 SET Pp
 	turn 1

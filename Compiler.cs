@@ -69,20 +69,12 @@ namespace jf
             this.FillPerformable(startOfPerformable);
         }
 
-        public Node getPerformableTableRoot()
-        {
-            return this.performableSymboltTable.root;
-        }
+        public Node getPerformableTableRoot(){ return this.performableSymboltTable.root; }
+        public List<Tuple<int, string>> getRealLine(){ return this.realLines; }
+        public List<Tuple<string, List<double>>> getConstants() { return this.constants; }
+        public Explanation getExplanationSymbolTable() { return this.explanationSymbolTable; }
 
-        public List<Tuple<int, string>> getRealLine()
-        {
-            return this.realLines;
-        }
-        
-        public List<Tuple<string, List<double>>> getConstants()
-        {
-            return this.constants;
-        }
+        public List<Tuple<string, double>> getVariables() { return this.variables; }
 
         public string[] Tokenizer(string line)
         {
@@ -541,7 +533,7 @@ namespace jf
                 }
                 string[] result = this.Tokenizer(line.Item2);
                 this.chechForError(result, false, realLineCounter);
-                this.explanationSymbolTable.st.insert(result[0], result[1]);
+                this.explanationSymbolTable.st.insert(result[0], result[1], realLineCounter);
                 lineCounter++;
                 realLineCounter++;
             }

@@ -53,6 +53,7 @@
     <Compile Include="AGauge.designer.cs">
       <DependentUpon>AGauge.cs</DependentUpon>
     </Compile>
+    <Compile Include="Command.cs" />
     <Compile Include="richtextBoxHighlighter.cs" />
     <Compile Include="Compiler.cs" />
     <Compile Include="CustomError.cs" />
