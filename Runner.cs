@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 using System.Drawing;
@@ -13,7 +10,8 @@ namespace jf
     {
         jf.Compiler compiler;
         Queue<jf.Command> commands;
-        Color GREEN = Color.FromArgb(0x4c, 0xe6, 0x00); //#4ce600
+        Color GREEN = Color.FromArgb(0x4c, 0xe6, 0x00); // #4ce600
+        Color RED = Color.FromArgb(0xff, 0x5c, 0x33); // #ff5c33
 
         public Runner(jf.Compiler compiler, Queue<jf.Command> commands)
         {
@@ -72,8 +70,20 @@ namespace jf
             int realLineCounter = 0;
             bool isPerformable = false;
             List<Tuple<int, string>> test = compiler.getRealLine();
+            List<CustomError> compilerErrors = compiler.GetErrors();
             jf.Explanation explanation = compiler.getExplanationSymbolTable();
             List<Tuple<int, string>> realLines = compiler.getRealLine();
+
+            if(compilerErrors.Count > 0)
+            {
+                errorDetected = true;
+            }
+
+            foreach(CustomError error in compilerErrors)
+            {
+                this.commands.Enqueue(new Command("highlight", error.getLineNumber(), this.RED));
+                this.commands.Enqueue(new Command("test", "testtttt" + error.getMessage() + "\n"));
+            }
             while (!errorDetected)
             {
                 if (realLines[realLineCounter].Item2.ToLower() == "begin")
@@ -94,13 +104,11 @@ namespace jf
                     switch (explanation.st.table[lineCounter][0].ToLower())
                     {
                         case "jf122":
-                            //commands.Enqueue(new Command("highlight", lineCounter, Color.FromArgb(0x4c, 0xe6, 0x00)));
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
                             lineCounter++;
                             realLineCounter++;
                             break;
                         case "code":
-                            //commands.Enqueue(new Command("highlight", lineCounter, Color.FromArgb(0x4c, 0xe6, 0x00)));
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
                             lineCounter++;
                             realLineCounter++;
@@ -113,6 +121,7 @@ namespace jf
                             break;
                         case "r0":
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.commands.Enqueue(new Command("set", explanation.st.table[lineCounter][1]));
                             this.writeCommandToFile("r0 " + explanation.st.table[lineCounter][1]);
                             lineCounter++;
                             realLineCounter++;
@@ -163,8 +172,8 @@ namespace jf
 
 
                     current = temp.child[index];
-                        switch (current.identifier.ToLower())
-                        {
+                    switch (current.identifier.ToLower())
+                    {
                         case "begin":
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
                             break;
@@ -180,7 +189,7 @@ namespace jf
                             if(data == null)
                             {
                                 // TODO: add cross mark in UI
-                                this.commands.Enqueue(new Command("highlight", realLineCounter, Color.Red));
+                                this.commands.Enqueue(new Command("highlight error", realLineCounter, this.RED));
                                 errorDetected = true;
                                 break;
                             }
@@ -217,12 +226,25 @@ namespace jf
                                 // TODO: test commands should delete
                                 this.commands.Enqueue(new Command("test", "testtttt" + test1 + "\n"));
                             }
-                            
                             break;
+                        case "set":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.writeCommandToFile("set " + current.attribute);
+                            // TODO: we should complete it later
+                            realLineCounter++;
+                            break;
+                    }
+                    while (true)
+                    {
+                        if (realLines[realLineCounter].Item2 == "")
+                        {
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            realLineCounter++;
                         }
+                        else break;
+                    }
 
 
-                    //sw.WriteLine(current.realLine.ToString() + "    " + current.identifier + " " + current.attribute);
                     if (current.child.Count > 0)
                     {
                         parentStack.Push(current);
@@ -250,26 +272,6 @@ namespace jf
                     }
                 }
             }
-            /*try
-            {
-                using (StreamReader sr = new StreamReader(commandFilePath))
-                {
-                    while ((line = sr.ReadLine()) != null)
-                    {
-                        totalFile += line + "\n";
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-                return "Exception: " + e.Message;
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }*/
-            //return totalFile;
         }
     }
 }

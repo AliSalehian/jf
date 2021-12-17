@@ -73,8 +73,8 @@ namespace jf
         public List<Tuple<int, string>> getRealLine(){ return this.realLines; }
         public List<Tuple<string, List<double>>> getConstants() { return this.constants; }
         public Explanation getExplanationSymbolTable() { return this.explanationSymbolTable; }
-
         public List<Tuple<string, double>> getVariables() { return this.variables; }
+        public List<CustomError> GetErrors() { return this.errors; }
 
         public string[] Tokenizer(string line)
         {
@@ -505,7 +505,7 @@ namespace jf
                 this.errors.Add(new CustomError(i, this.allErrorsText[12]));
             }
 
-            if(lastLine.Length > 0)
+            if(lastLine.Length > 2)
             {
                 this.errors.Add(new CustomError(i, this.allErrorsText[13]));
             }

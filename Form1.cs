@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace WindowsFormsApp1
 {
@@ -15,9 +12,7 @@ namespace WindowsFormsApp1
         jf.Compiler compiler;
         Queue<jf.Command> commands;
         System.Threading.Thread t;
-        //jf.Compiler compiler = new jf.Compiler();
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
-        //jf.Runner runner = new jf.Runner();
 
         public Form1(Object compiler, Object commands)
         {
@@ -134,19 +129,6 @@ namespace WindowsFormsApp1
             chart1.Left = richTextBox1.Width+60;
             richTextBox1.Left = 30;
             rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine());
-            richTextBox1.AppendText("###############################\n");
-            List < Tuple<string, List<double>> > test = compiler.getConstants();
-            string value = "";
-            for (int i=0; i < test.Count; i++)
-            {
-                value = "";
-                foreach(double d in test[i].Item2)
-                {
-                    value += d.ToString() + " ";
-                } 
-                richTextBox1.AppendText(test[i].Item1 + "   " + value + "\n");
-            }
-            richTextBox1.AppendText("###############################\n");
             panel3.Left = (ClientSize.Width - panel3.Width) / 2;
             t = new System.Threading.Thread(ReadCommands);
             t.Start();
@@ -161,10 +143,11 @@ namespace WindowsFormsApp1
                 {
                     if (commands.Count > 0)
                     {
-                        jf.Command c = this.commands.Dequeue();
-                        if (c.getType() == "highlight")
+                        jf.Command command = this.commands.Dequeue();
+                        string[] types = command.getType().Split(' ');
+                        if (types.Contains("highlight"))
                         {
-                            int CommandlineNumber = c.getLineNumber();
+                            int CommandlineNumber = command.getLineNumber();
                             int start, length;
                             if (CommandlineNumber > 0)
                             {
@@ -189,14 +172,26 @@ namespace WindowsFormsApp1
                             richTextBox1.Select(start, length);
                             string pastText = richTextBox1.SelectedText;
                             string change = pastText.Split(' ')[0];
-                            richTextBox1.SelectedText = pastText.Replace(change, Encoding.UTF8.GetString(Encoding.Convert(Encoding.Unicode, Encoding.UTF8, Encoding.Unicode.GetBytes("\u2705"))));
+                            if (types.Contains("error"))
+                            {
+                                richTextBox1.SelectedText = pastText.Replace(change, Encoding.UTF8.GetString(Encoding.Convert(Encoding.Unicode, Encoding.UTF8, Encoding.Unicode.GetBytes("\u2716"))));
+                            }
+                            else
+                            {
+                                richTextBox1.SelectedText = pastText.Replace(change, Encoding.UTF8.GetString(Encoding.Convert(Encoding.Unicode, Encoding.UTF8, Encoding.Unicode.GetBytes("\u2705"))));
+                            }
                             richTextBox1.Select(start, length);
-                            richTextBox1.SelectionBackColor = c.getBgColor();
+                            richTextBox1.SelectionBackColor = command.getBgColor();
                             counter++;
                         }
-                        if(c.getType() == "test")
+                        if(types.Contains("test"))
                         {
-                            richTextBox1.AppendText(c.getNewLine());
+                            richTextBox1.AppendText(command.getNewLine());
+                        }
+                        if (types.Contains("set"))
+                        {
+                            R0.Text = command.getNewLine();
+                            R0.ReadOnly = true;
                         }
                     }
                 };

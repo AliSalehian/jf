@@ -62,7 +62,7 @@ namespace WindowsFormsApp1
             this.limitSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.R0 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button12 = new System.Windows.Forms.Button();
@@ -416,13 +416,13 @@ namespace WindowsFormsApp1
             this.label5.TabIndex = 3;
             this.label5.Text = "R0 : ";
             // 
-            // textBox1
+            // R0
             // 
-            this.textBox1.Location = new System.Drawing.Point(336, 385);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(97, 22);
-            this.textBox1.TabIndex = 7;
+            this.R0.Location = new System.Drawing.Point(336, 385);
+            this.R0.Margin = new System.Windows.Forms.Padding(4);
+            this.R0.Name = "R0";
+            this.R0.Size = new System.Drawing.Size(97, 22);
+            this.R0.TabIndex = 7;
             // 
             // panel1
             // 
@@ -1073,7 +1073,7 @@ namespace WindowsFormsApp1
             // 
             this.panel3.Controls.Add(this.aGauge1);
             this.panel3.Controls.Add(this.aGauge2);
-            this.panel3.Controls.Add(this.textBox1);
+            this.panel3.Controls.Add(this.R0);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.label2);
@@ -1296,7 +1296,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button StartFanManual;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox R0;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button ConditionarManual;
         private System.Windows.Forms.TrackBar Pressure;
