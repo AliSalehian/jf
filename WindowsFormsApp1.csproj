@@ -69,6 +69,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runner.cs" />
+    <Compile Include="Sensor.cs" />
+    <Compile Include="SensorHandler.cs" />
     <Compile Include="SymbolTable.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

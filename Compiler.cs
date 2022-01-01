@@ -24,8 +24,8 @@ namespace jf
         private readonly List<Token> tokens;
         private readonly List<string> lines;
         private readonly List<Tuple<int, string>> realLines;
-        private readonly List<Tuple<string, double>> variables;
-        private readonly List<Tuple<string, List<double>>> constants;
+        private readonly List<Tuple<string, double>> variables; // variables contains var that user created
+        private readonly List<Tuple<string, List<double>>> constants; // constants contains R0, i, kmu and data
         private readonly Explanation explanationSymbolTable = new Explanation();
         private readonly Performable performableSymboltTable = new Performable();
         private readonly List<CustomError> errors;

@@ -10,13 +10,15 @@ namespace jf
     {
         jf.Compiler compiler;
         Queue<jf.Command> commands;
+        SensorHandler sensorHandler;
         Color GREEN = Color.FromArgb(0x4c, 0xe6, 0x00); // #4ce600
         Color RED = Color.FromArgb(0xff, 0x5c, 0x33); // #ff5c33
 
-        public Runner(jf.Compiler compiler, Queue<jf.Command> commands)
+        public Runner(jf.Compiler compiler, Queue<jf.Command> commands, SensorHandler sensorHandler)
         {
             this.compiler = compiler;
             this.commands = commands;
+            this.sensorHandler = sensorHandler;
         }
 
         public void writeCommandToFile(string text)
@@ -63,13 +65,85 @@ namespace jf
             }
         }
 
+        public bool checkCondition(string condition, List<Tuple<string, double>> variables)
+        {
+            string operand1;
+            string operand2;
+            string comparisionOperator = "";
+            double valueOfOperand1;
+            double valueOfOperand2;
+            if (condition.Contains("<=")){
+                comparisionOperator = "<=";
+            }else if (condition.Contains(">="))
+            {
+                comparisionOperator = ">=";
+            }else if (condition.Contains("="))
+            {
+                comparisionOperator = "=";
+            }else if (condition.Contains(">"))
+            {
+                comparisionOperator = ">";
+            }else if (condition.Contains("<"))
+            {
+                comparisionOperator= "<";
+            }
+            string[] temp = condition.Split(new string[] { comparisionOperator }, StringSplitOptions.None);
+            operand1 = temp[0].Trim();
+            operand2 = temp[1].Trim();
+            if (double.TryParse(operand1, out valueOfOperand1) == true)
+            {
+                valueOfOperand1 = double.Parse(operand1);
+            }
+            else
+            {
+                if (this.sensorHandler.checkSensorExist(operand1))
+                {
+                    valueOfOperand1 = this.sensorHandler.getSensor(operand1);
+                }else
+                {
+                    valueOfOperand1 = this.findVariable(variables, operand1);
+                }
+            }
+
+
+            if (double.TryParse(operand2, out valueOfOperand2) == true)
+            {
+                valueOfOperand2 = double.Parse(operand2);
+            }
+            else
+            {
+                if (this.sensorHandler.checkSensorExist(operand2))
+                {
+                    valueOfOperand2 = this.sensorHandler.getSensor(operand2);
+                }
+                else
+                {
+                    valueOfOperand2 = this.findVariable(variables, operand2);
+                }
+            }
+
+            switch (comparisionOperator)
+            {
+                case "<":
+                    return valueOfOperand1 < valueOfOperand2;
+                case ">":
+                    return valueOfOperand1 > valueOfOperand2;
+                case "=":
+                    return valueOfOperand1 == valueOfOperand2;
+                case "<=":
+                    return valueOfOperand1 <= valueOfOperand2;
+                case ">=":
+                    return valueOfOperand2 >= valueOfOperand1;
+            }
+            return false;
+        }
+
         public void run()
         {
             bool errorDetected = false;
             int lineCounter = 0;
             int realLineCounter = 0;
             bool isPerformable = false;
-            List<Tuple<int, string>> test = compiler.getRealLine();
             List<CustomError> compilerErrors = compiler.GetErrors();
             jf.Explanation explanation = compiler.getExplanationSymbolTable();
             List<Tuple<int, string>> realLines = compiler.getRealLine();
@@ -270,8 +344,20 @@ namespace jf
                             break;
                         case "wait":
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            this.writeCommandToFile("wait " + current.attribute);
-                            // TODO: command should pause the runner till condtion satisfied. condition is about time or temprture sensor.
+                            if(this.checkCondition(current.attribute, variables)){
+                                this.writeCommandToFile("wait condiotion satisfied");
+                            }
+                            else
+                            {
+                                this.writeCommandToFile("wait condiotion didnt satisfied and runner waited");
+                                while(true)
+                                {
+                                    if(this.checkCondition(current.attribute, variables))
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
                             realLineCounter++;
                             if (loopEndIndex.Count != 0)
                             {
@@ -280,8 +366,18 @@ namespace jf
                             break;
                         case "brake":
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            this.writeCommandToFile("brake " + current.attribute);
-                            // TODO: command should brake for time or n condition. p or m in command should the level of 
+                            // TODO: command should log if r flag seted
+                            string condition = current.attribute.Split(',')[1].Replace("UNTIL", "");
+                            string presure = current.attribute.Split(',')[0];
+                            while (true)
+                            {
+                                if(this.checkCondition(condition, variables))
+                                {
+                                    break;
+                                }
+                                this.writeCommandToFile("brake presure: " + presure);
+                            }
+                            
                             realLineCounter++;
                             if (loopEndIndex.Count != 0)
                             {

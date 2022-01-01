@@ -12,18 +12,19 @@ namespace WindowsFormsApp1
         /// </summary>
         static jf.Compiler compiler = new jf.Compiler();
         static Queue<jf.Command> queue = new Queue<jf.Command>();
+        static jf.SensorHandler sensorHandler = new jf.SensorHandler();
         [STAThread]
         static void Main()
         {
-            jf.Runner runner = new jf.Runner(Program.compiler, queue);
+            sensorHandler.setSensor("T3", 80);
+            sensorHandler.setSensor("n", 80);
+            jf.Runner runner = new jf.Runner(Program.compiler, queue, sensorHandler);
 
             Thread backendThread = new Thread(new ThreadStart(runner.run));
             backendThread.Start();
 
             Thread UIThread = new Thread(new ThreadStart(Program.runUI));
             UIThread.Start();
-
-
         }
 
         public static void runUI()
