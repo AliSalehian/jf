@@ -73,6 +73,11 @@ namespace jf
             List<CustomError> compilerErrors = compiler.GetErrors();
             jf.Explanation explanation = compiler.getExplanationSymbolTable();
             List<Tuple<int, string>> realLines = compiler.getRealLine();
+            Stack<int> loopCount = new Stack<int>();
+            Stack<bool> loopStarted = new Stack<bool>();
+            Stack<int> loopIndex = new Stack<int>();
+            Stack<int> loopEndIndex = new Stack<int>();
+            bool loopSeen = false;
 
             if(compilerErrors.Count > 0)
             {
@@ -158,20 +163,29 @@ namespace jf
                 Stack parentStack = new Stack();
                 Stack parentIndexStack = new Stack();
                 Node current = null;
-                int index;
+                int index = 0;
                 parentIndexStack.Push(0);
                 parentStack.Push(root);
                 while (!errorDetected)
                 {
-                    index = (int)parentIndexStack.Peek();
+                    if (loopSeen && loopStarted.Peek() == true)
+                    {
+                        index = loopIndex.Peek();
+                        loopSeen = false;
+                    }
+                    else
+                    {
+                        index = (int)parentIndexStack.Peek();
+                    }
+
                     Node temp = (Node)parentStack.Peek();
                     if (index > temp.child.Count - 1)
                     {
                         break;
                     }
 
-
                     current = temp.child[index];
+                    
                     switch (current.identifier.ToLower())
                     {
                         case "begin":
@@ -233,9 +247,107 @@ namespace jf
                             // TODO: we should complete it later
                             realLineCounter++;
                             break;
+                        case "turn":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.writeCommandToFile("turn " + current.attribute);
+                            realLineCounter++;
+                            break;
+                        case "fan":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.writeCommandToFile("fan " + current.attribute);
+                            realLineCounter++;
+                            break;
+                        case "speed":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.writeCommandToFile("speed " + current.attribute);
+                            // TODO: command increase speed and reed speed sensor till condition satisfied. if c is exist speed should keep on condition 
+                            // else turn off motor
+                            realLineCounter++;
+                            if(loopEndIndex.Count != 0)
+                            {
+                                    realLineCounter--;
+                            }
+                            break;
+                        case "wait":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.writeCommandToFile("wait " + current.attribute);
+                            // TODO: command should pause the runner till condtion satisfied. condition is about time or temprture sensor.
+                            realLineCounter++;
+                            if (loopEndIndex.Count != 0)
+                            {
+                                    realLineCounter--;
+                            }
+                            break;
+                        case "brake":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.writeCommandToFile("brake " + current.attribute);
+                            // TODO: command should brake for time or n condition. p or m in command should the level of 
+                            realLineCounter++;
+                            if (loopEndIndex.Count != 0)
+                            {
+                                    realLineCounter--;
+                            }
+                            break;
+                        case "loop":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            // TODO: we should complete it later
+                            // TODO: check error handler in compiler for LOOP. LOOP should have attribute
+                            loopCount.Push(Int32.Parse(current.attribute));
+                            loopStarted.Push(true);
+                            loopIndex.Push(0);
+                            realLineCounter++;
+                            loopSeen = true;
+                            break;
+                        case "lend":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            // TODO: we should complete it later, there is 4 kind of loop. type 1 is done
+                            int currentLoopRepeat = loopCount.Pop();
+                            if (loopEndIndex.Count == 0)
+                            {
+                                loopEndIndex.Push(index);
+                            }
+                            else
+                            {
+                                if(loopEndIndex.Peek() != index)
+                                {
+                                    loopEndIndex.Push(index);
+                                }
+                            }
+                            currentLoopRepeat--;
+                            if(currentLoopRepeat <= 0)
+                            {
+                                loopStarted.Pop();
+                                loopStarted.Push(false);
+                                loopSeen = false;
+                                parentStack.Pop();
+                                parentIndexStack.Pop();
+                                index = (int)parentIndexStack.Peek();
+                                temp = (Node)parentStack.Peek();
+                                loopEndIndex.Pop();
+                                realLineCounter++;
+                                break;
+                            }
+                            else
+                            {
+                                current = (Node)parentStack.Peek();
+                                current = current.child[0];
+                                loopCount.Push(currentLoopRepeat);
+                                loopSeen = true;
+                            }
+                            break;
+                        case "end":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            this.writeCommandToFile("end!!!");
+                            realLineCounter++;
+                            break;
                     }
                     while (true)
                     {
+                        if(realLineCounter >= realLines.Count)
+                        {
+                            errorDetected = true;
+                            break;
+                        }
                         if (realLines[realLineCounter].Item2 == "")
                         {
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
@@ -243,15 +355,33 @@ namespace jf
                         }
                         else break;
                     }
-
-
                     if (current.child.Count > 0)
                     {
                         parentStack.Push(current);
                         parentIndexStack.Push(0);
                         continue;
                     }
-                    if (index + 1 < temp.child.Count)
+                    if (loopStarted.Count > 0)
+                    {
+                        if (loopStarted.Peek() == true)
+                        {
+                            if(loopEndIndex.Count <= 0)
+                            {
+                                index++;
+                                parentIndexStack.Pop();
+                                parentIndexStack.Push(index);
+                                continue;
+                            }
+                            if (index <= loopEndIndex.Peek())
+                            {
+                                index++;
+                                parentIndexStack.Pop();
+                                parentIndexStack.Push(index);
+                                continue;
+                            }
+                        }
+                    }
+                    if (index < temp.child.Count)
                     {
                         index++;
                         parentIndexStack.Pop();
