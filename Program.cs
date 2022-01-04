@@ -16,6 +16,7 @@ namespace WindowsFormsApp1
         [STAThread]
         static void Main()
         {
+            sensorHandler.setSensor("T1", 480);
             sensorHandler.setSensor("T3", 80);
             sensorHandler.setSensor("n", 80);
             jf.Runner runner = new jf.Runner(Program.compiler, queue, sensorHandler);

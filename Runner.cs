@@ -240,6 +240,8 @@ namespace jf
                 int index = 0;
                 parentIndexStack.Push(0);
                 parentStack.Push(root);
+                DateTime start = DateTime.Now;
+                DateTime end = DateTime.Now;
                 while (!errorDetected)
                 {
                     if (loopSeen && loopStarted.Peek() == true)
@@ -386,23 +388,72 @@ namespace jf
                             break;
                         case "loop":
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            // TODO: we should complete it later
                             // TODO: check error handler in compiler for LOOP. LOOP should have attribute
                             loopCount.Push(Int32.Parse(current.attribute));
                             loopStarted.Push(true);
                             loopIndex.Push(0);
                             realLineCounter++;
                             loopSeen = true;
+                            start = DateTime.Now;
                             break;
                         case "lend":
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            // TODO: we should complete it later, there is 4 kind of loop. type 1 is done
+                            bool conditionStisfied = true;
+                            string LoopCondition = ""; 
+                            int validDuration = 0;
+                            if (current.attribute.Contains(","))
+                            {
+                                LoopCondition = current.attribute.Split(',')[1].ToLower().Replace("while", "");
+                                conditionStisfied = this.checkCondition(LoopCondition, variables);
+                                if (Int32.TryParse(current.attribute.Split(',')[0], out validDuration))
+                                {
+                                    validDuration = Int32.Parse(current.attribute.Split(',')[0]);
+                                }
+                                while (true)
+                                {
+                                    end = DateTime.Now;
+                                    TimeSpan loopDuration = end - start;
+                                    if (validDuration + 1 <= loopDuration.TotalSeconds)
+                                    {
+                                        this.writeCommandToFile("WARNING > valid duration is: " + validDuration + " but loop duration is: " + loopDuration.TotalSeconds + " s");
+                                        break;
+                                    }
+                                    else if (validDuration <= loopDuration.TotalSeconds)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                            else if (current.attribute.ToLower().Contains("while"))
+                            {
+                                LoopCondition = current.attribute.ToLower().Replace("while", "");
+                                conditionStisfied = this.checkCondition(LoopCondition, variables);
+                            }else if(current.attribute.Length > 0)
+                            {
+                                if(Int32.TryParse(current.attribute, out validDuration))
+                                {
+                                    validDuration = Int32.Parse(current.attribute);
+                                }
+                                while (true)
+                                {
+                                    end = DateTime.Now;
+                                    TimeSpan loopDuration = end - start;
+                                    if(validDuration+1 <= loopDuration.TotalSeconds)
+                                    {
+                                        this.writeCommandToFile("WARNING > valid duration is: " + validDuration + " but loop duration is: " + loopDuration.TotalSeconds + " s");
+                                        break;
+                                    }else if (validDuration <= loopDuration.TotalSeconds)
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
                             int currentLoopRepeat = loopCount.Pop();
-                            if (loopEndIndex.Count == 0)
+                            if (loopEndIndex.Count == 0 && conditionStisfied)
                             {
                                 loopEndIndex.Push(index);
                             }
-                            else
+                            else if(loopEndIndex.Count != 0 && conditionStisfied)
                             {
                                 if(loopEndIndex.Peek() != index)
                                 {
@@ -410,8 +461,12 @@ namespace jf
                                 }
                             }
                             currentLoopRepeat--;
-                            if(currentLoopRepeat <= 0)
+                            if(currentLoopRepeat <= 0 || !conditionStisfied)
                             {
+                                if (!conditionStisfied)
+                                {
+                                    this.writeCommandToFile("while condition didnt satisfied!!!");
+                                }
                                 loopStarted.Pop();
                                 loopStarted.Push(false);
                                 loopSeen = false;
@@ -419,7 +474,8 @@ namespace jf
                                 parentIndexStack.Pop();
                                 index = (int)parentIndexStack.Peek();
                                 temp = (Node)parentStack.Peek();
-                                loopEndIndex.Pop();
+                                if(loopEndIndex.Count != 0)
+                                    loopEndIndex.Pop();
                                 realLineCounter++;
                                 break;
                             }

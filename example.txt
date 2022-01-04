@@ -28,5 +28,5 @@ ADD a, b
              wait t3<=100
 	     SPEED 80
                     BRAKE  p=3  ,UNTIL n<=270 ,r
-	   LEND
+	   LEND 1, WHILE T1<370
 END
