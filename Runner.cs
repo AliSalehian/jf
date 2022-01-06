@@ -13,6 +13,7 @@ namespace jf
         SensorHandler sensorHandler;
         Color GREEN = Color.FromArgb(0x4c, 0xe6, 0x00); // #4ce600
         Color RED = Color.FromArgb(0xff, 0x5c, 0x33); // #ff5c33
+        Color ORANGE = Color.FromArgb(0xff, 0xcc, 0x00);
 
         public Runner(jf.Compiler compiler, Queue<jf.Command> commands, SensorHandler sensorHandler)
         {
@@ -161,7 +162,6 @@ namespace jf
             foreach(CustomError error in compilerErrors)
             {
                 this.commands.Enqueue(new Command("highlight", error.getLineNumber(), this.RED));
-                this.commands.Enqueue(new Command("test", "testtttt" + error.getMessage() + "\n"));
             }
             while (!errorDetected)
             {
@@ -242,6 +242,8 @@ namespace jf
                 parentStack.Push(root);
                 DateTime start = DateTime.Now;
                 DateTime end = DateTime.Now;
+                Stack<bool> ifConditionSatisfied = new Stack<bool>();
+                ifConditionSatisfied.Push(true);
                 while (!errorDetected)
                 {
                     if (loopSeen && loopStarted.Peek() == true)
@@ -268,228 +270,331 @@ namespace jf
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
                             break;
                         case "var":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            realLineCounter++;
-                            break;
-                        case "read":
-                            if (data == null)
+                            if (ifConditionSatisfied.Peek())
                             {
-                                data = this.findData(constants);
-                            }
-                            if(data == null)
-                            {
-                                // TODO: add cross mark in UI
-                                this.commands.Enqueue(new Command("highlight error", realLineCounter, this.RED));
-                                errorDetected = true;
-                                break;
-                            }
-                            if (indexOfData > data.Count) indexOfData--;
-                            this.findVariableAndChangeValue(variables, current.attribute, data[indexOfData]);
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            // TODO: test commands should delete
-                            this.commands.Enqueue(new Command("test", "testtttt" + data[indexOfData].ToString() + "\n"));
-                            indexOfData++;
-                            realLineCounter++;
-                            break;
-                        case "restore":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            indexOfData = 0;
-                            realLineCounter++;
-                            break;
-                        case "add":
-                            double test1 = 0;
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            realLineCounter++;
-                            string[] temp1 = current.attribute.Split(',');
-                            double newValue = 0;
-                            if (double.TryParse(temp1[1], out newValue))
-                            {
-                                test1 = newValue + this.findVariable(variables, temp1[0]);
-                                this.findVariableAndChangeValue(variables, temp1[0], test1);
-                                // TODO: test commands should delete
-                                this.commands.Enqueue(new Command("test", "testtttt" + test1 + "\n"));
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                realLineCounter++;
                             }
                             else
                             {
-                                test1 = this.findVariable(variables, temp1[1]) + this.findVariable(variables, temp1[0]);
-                                this.findVariableAndChangeValue(variables, temp1[0], test1);
-                                // TODO: test commands should delete
-                                this.commands.Enqueue(new Command("test", "testtttt" + test1 + "\n"));
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
+                            break;
+                        case "read":
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                if (data == null)
+                                {
+                                    data = this.findData(constants);
+                                }
+                                if (data == null)
+                                {
+                                    // TODO: add cross mark in UI
+                                    this.commands.Enqueue(new Command("highlight error", realLineCounter, this.RED));
+                                    errorDetected = true;
+                                    break;
+                                }
+                                if (indexOfData > data.Count) indexOfData--;
+                                this.findVariableAndChangeValue(variables, current.attribute, data[indexOfData]);
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                indexOfData++;
+                                realLineCounter++;
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
+                            break;
+                        case "restore":
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                indexOfData = 0;
+                                realLineCounter++;
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
+                            break;
+                        case "add":
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                double test1 = 0;
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                realLineCounter++;
+                                string[] temp1 = current.attribute.Split(',');
+                                double newValue = 0;
+                                if (double.TryParse(temp1[1], out newValue))
+                                {
+                                    test1 = newValue + this.findVariable(variables, temp1[0]);
+                                    this.findVariableAndChangeValue(variables, temp1[0], test1);
+                                }
+                                else
+                                {
+                                    test1 = this.findVariable(variables, temp1[1]) + this.findVariable(variables, temp1[0]);
+                                    this.findVariableAndChangeValue(variables, temp1[0], test1);
+                                }
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
                             }
                             break;
                         case "set":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            this.writeCommandToFile("set " + current.attribute);
-                            // TODO: we should complete it later
-                            realLineCounter++;
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                this.writeCommandToFile("set " + current.attribute);
+                                // TODO: we should complete it later
+                                realLineCounter++;
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
                             break;
                         case "turn":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            this.writeCommandToFile("turn " + current.attribute);
-                            realLineCounter++;
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                this.writeCommandToFile("turn " + current.attribute);
+                                realLineCounter++;
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
                             break;
                         case "fan":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            this.writeCommandToFile("fan " + current.attribute);
-                            realLineCounter++;
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                this.writeCommandToFile("fan " + current.attribute);
+                                realLineCounter++;
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
                             break;
                         case "speed":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            this.writeCommandToFile("speed " + current.attribute);
-                            // TODO: command increase speed and reed speed sensor till condition satisfied. if c is exist speed should keep on condition 
-                            // else turn off motor
-                            realLineCounter++;
-                            if(loopEndIndex.Count != 0)
+                            if (ifConditionSatisfied.Peek())
                             {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                this.writeCommandToFile("speed " + current.attribute);
+                                // TODO: command increase speed and reed speed sensor till condition satisfied. if c is exist speed should keep on condition 
+                                // else turn off motor
+                                realLineCounter++;
+                                if (loopEndIndex.Count != 0)
+                                {
                                     realLineCounter--;
+                                }
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
                             }
                             break;
                         case "wait":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            if(this.checkCondition(current.attribute, variables)){
-                                this.writeCommandToFile("wait condiotion satisfied");
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                if (this.checkCondition(current.attribute, variables))
+                                {
+                                    this.writeCommandToFile("wait condiotion satisfied");
+                                }
+                                else
+                                {
+                                    this.writeCommandToFile("wait condiotion didnt satisfied and runner waited");
+                                    while (true)
+                                    {
+                                        if (this.checkCondition(current.attribute, variables))
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                realLineCounter++;
+                                if (loopEndIndex.Count != 0)
+                                {
+                                    realLineCounter--;
+                                }
                             }
                             else
                             {
-                                this.writeCommandToFile("wait condiotion didnt satisfied and runner waited");
-                                while(true)
-                                {
-                                    if(this.checkCondition(current.attribute, variables))
-                                    {
-                                        break;
-                                    }
-                                }
-                            }
-                            realLineCounter++;
-                            if (loopEndIndex.Count != 0)
-                            {
-                                    realLineCounter--;
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
                             }
                             break;
                         case "brake":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            // TODO: command should log if r flag seted
-                            string condition = current.attribute.Split(',')[1].Replace("UNTIL", "");
-                            string presure = current.attribute.Split(',')[0];
-                            while (true)
+                            if (ifConditionSatisfied.Peek())
                             {
-                                if(this.checkCondition(condition, variables))
-                                {
-                                    break;
-                                }
-                                this.writeCommandToFile("brake presure: " + presure);
-                            }
-                            
-                            realLineCounter++;
-                            if (loopEndIndex.Count != 0)
-                            {
-                                    realLineCounter--;
-                            }
-                            break;
-                        case "loop":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            // TODO: check error handler in compiler for LOOP. LOOP should have attribute
-                            loopCount.Push(Int32.Parse(current.attribute));
-                            loopStarted.Push(true);
-                            loopIndex.Push(0);
-                            realLineCounter++;
-                            loopSeen = true;
-                            start = DateTime.Now;
-                            break;
-                        case "lend":
-                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
-                            bool conditionStisfied = true;
-                            string LoopCondition = ""; 
-                            int validDuration = 0;
-                            if (current.attribute.Contains(","))
-                            {
-                                LoopCondition = current.attribute.Split(',')[1].ToLower().Replace("while", "");
-                                conditionStisfied = this.checkCondition(LoopCondition, variables);
-                                if (Int32.TryParse(current.attribute.Split(',')[0], out validDuration))
-                                {
-                                    validDuration = Int32.Parse(current.attribute.Split(',')[0]);
-                                }
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                // TODO: command should log if r flag seted
+                                string condition = current.attribute.Split(',')[1].Replace("UNTIL", "");
+                                string presure = current.attribute.Split(',')[0];
                                 while (true)
                                 {
-                                    end = DateTime.Now;
-                                    TimeSpan loopDuration = end - start;
-                                    if (validDuration + 1 <= loopDuration.TotalSeconds)
-                                    {
-                                        this.writeCommandToFile("WARNING > valid duration is: " + validDuration + " but loop duration is: " + loopDuration.TotalSeconds + " s");
-                                        break;
-                                    }
-                                    else if (validDuration <= loopDuration.TotalSeconds)
+                                    if (this.checkCondition(condition, variables))
                                     {
                                         break;
                                     }
+                                    this.writeCommandToFile("brake presure: " + presure);
                                 }
-                            }
-                            else if (current.attribute.ToLower().Contains("while"))
-                            {
-                                LoopCondition = current.attribute.ToLower().Replace("while", "");
-                                conditionStisfied = this.checkCondition(LoopCondition, variables);
-                            }else if(current.attribute.Length > 0)
-                            {
-                                if(Int32.TryParse(current.attribute, out validDuration))
-                                {
-                                    validDuration = Int32.Parse(current.attribute);
-                                }
-                                while (true)
-                                {
-                                    end = DateTime.Now;
-                                    TimeSpan loopDuration = end - start;
-                                    if(validDuration+1 <= loopDuration.TotalSeconds)
-                                    {
-                                        this.writeCommandToFile("WARNING > valid duration is: " + validDuration + " but loop duration is: " + loopDuration.TotalSeconds + " s");
-                                        break;
-                                    }else if (validDuration <= loopDuration.TotalSeconds)
-                                    {
-                                        break;
-                                    }
-                                }
-                            }
-                            int currentLoopRepeat = loopCount.Pop();
-                            if (loopEndIndex.Count == 0 && conditionStisfied)
-                            {
-                                loopEndIndex.Push(index);
-                            }
-                            else if(loopEndIndex.Count != 0 && conditionStisfied)
-                            {
-                                if(loopEndIndex.Peek() != index)
-                                {
-                                    loopEndIndex.Push(index);
-                                }
-                            }
-                            currentLoopRepeat--;
-                            if(currentLoopRepeat <= 0 || !conditionStisfied)
-                            {
-                                if (!conditionStisfied)
-                                {
-                                    this.writeCommandToFile("while condition didnt satisfied!!!");
-                                }
-                                loopStarted.Pop();
-                                loopStarted.Push(false);
-                                loopSeen = false;
-                                parentStack.Pop();
-                                parentIndexStack.Pop();
-                                index = (int)parentIndexStack.Peek();
-                                temp = (Node)parentStack.Peek();
-                                if(loopEndIndex.Count != 0)
-                                    loopEndIndex.Pop();
                                 realLineCounter++;
-                                break;
+                                if (loopEndIndex.Count != 0)
+                                {
+                                    realLineCounter--;
+                                }
                             }
                             else
                             {
-                                current = (Node)parentStack.Peek();
-                                current = current.child[0];
-                                loopCount.Push(currentLoopRepeat);
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
+                            break;
+                        case "loop":
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                // TODO: check error handler in compiler for LOOP. LOOP should have attribute
+                                loopCount.Push(Int32.Parse(current.attribute));
+                                loopStarted.Push(true);
+                                loopIndex.Push(0);
                                 loopSeen = true;
+                                start = DateTime.Now;
+                                realLineCounter++;
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
+                            }
+                            break;
+                        case "lend":
+                            if (ifConditionSatisfied.Peek())
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                                bool conditionStisfied = true;
+                                string LoopCondition = "";
+                                int validDuration = 0;
+                                if (current.attribute.Contains(","))
+                                {
+                                    LoopCondition = current.attribute.Split(',')[1].ToLower().Replace("while", "");
+                                    conditionStisfied = this.checkCondition(LoopCondition, variables);
+                                    if (Int32.TryParse(current.attribute.Split(',')[0], out validDuration))
+                                    {
+                                        validDuration = Int32.Parse(current.attribute.Split(',')[0]);
+                                    }
+                                    while (true)
+                                    {
+                                        end = DateTime.Now;
+                                        TimeSpan loopDuration = end - start;
+                                        if (validDuration + 1 <= loopDuration.TotalSeconds)
+                                        {
+                                            this.writeCommandToFile("WARNING > valid duration is: " + validDuration + " but loop duration is: " + loopDuration.TotalSeconds + " s");
+                                            break;
+                                        }
+                                        else if (validDuration <= loopDuration.TotalSeconds)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                else if (current.attribute.ToLower().Contains("while"))
+                                {
+                                    LoopCondition = current.attribute.ToLower().Replace("while", "");
+                                    conditionStisfied = this.checkCondition(LoopCondition, variables);
+                                }
+                                else if (current.attribute.Length > 0)
+                                {
+                                    if (Int32.TryParse(current.attribute, out validDuration))
+                                    {
+                                        validDuration = Int32.Parse(current.attribute);
+                                    }
+                                    while (true)
+                                    {
+                                        end = DateTime.Now;
+                                        TimeSpan loopDuration = end - start;
+                                        if (validDuration + 1 <= loopDuration.TotalSeconds)
+                                        {
+                                            this.writeCommandToFile("WARNING > valid duration is: " + validDuration + " but loop duration is: " + loopDuration.TotalSeconds + " s");
+                                            break;
+                                        }
+                                        else if (validDuration <= loopDuration.TotalSeconds)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                }
+                                int currentLoopRepeat = loopCount.Pop();
+                                if (loopEndIndex.Count == 0 && conditionStisfied)
+                                {
+                                    loopEndIndex.Push(index);
+                                }
+                                else if (loopEndIndex.Count != 0 && conditionStisfied)
+                                {
+                                    if (loopEndIndex.Peek() != index)
+                                    {
+                                        loopEndIndex.Push(index);
+                                    }
+                                }
+                                currentLoopRepeat--;
+                                if (currentLoopRepeat <= 0 || !conditionStisfied)
+                                {
+                                    if (!conditionStisfied)
+                                    {
+                                        this.writeCommandToFile("while condition didnt satisfied!!!");
+                                    }
+                                    loopStarted.Pop();
+                                    loopStarted.Push(false);
+                                    loopSeen = false;
+                                    parentStack.Pop();
+                                    parentIndexStack.Pop();
+                                    index = (int)parentIndexStack.Peek();
+                                    temp = (Node)parentStack.Peek();
+                                    if (loopEndIndex.Count != 0)
+                                        loopEndIndex.Pop();
+                                    realLineCounter++;
+                                    break;
+                                }
+                                else
+                                {
+                                    current = (Node)parentStack.Peek();
+                                    current = current.child[0];
+                                    loopCount.Push(currentLoopRepeat);
+                                    loopSeen = true;
+                                }
+                            }
+                            else
+                            {
+                                this.commands.Enqueue(new Command("highlight", realLineCounter, this.ORANGE));
+                                realLineCounter++;
                             }
                             break;
                         case "end":
                             this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
                             this.writeCommandToFile("end!!!");
+                            realLineCounter++;
+                            break;
+                        case "if":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            ifConditionSatisfied.Push(this.checkCondition(current.attribute, variables));
+                            realLineCounter++;
+                            break;
+                        case "endif":
+                            this.commands.Enqueue(new Command("highlight", realLineCounter, this.GREEN));
+                            ifConditionSatisfied.Pop();
+                            index++;
                             realLineCounter++;
                             break;
                     }
@@ -546,10 +651,10 @@ namespace jf
                         {
                             break;
                         }
+                        parentIndexStack.Pop();
                         int tempIndex = (int)parentIndexStack.Pop();
                         tempIndex++;
                         parentStack.Pop();
-                        parentIndexStack.Pop();
                         parentIndexStack.Push(tempIndex);
                     }
                 }
