@@ -9,7 +9,7 @@ CODE Standard     : AK1 , AK2
 MODE 1
 
 
-R0  0.294
+R0  0.1294
 i 40.24
 Kmu 1
 data 4444, 5, 6

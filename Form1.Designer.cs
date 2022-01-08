@@ -34,24 +34,6 @@ namespace WindowsFormsApp1
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.Hydrau = new System.Windows.Forms.Label();
-            this.Unloading = new System.Windows.Forms.Label();
-            this.Brake = new System.Windows.Forms.Label();
-            this.HandBrake = new System.Windows.Forms.Label();
-            this.LoadL = new System.Windows.Forms.Label();
-            this.Unload = new System.Windows.Forms.Label();
-            this.Fan = new System.Windows.Forms.Label();
-            this.Conditioner = new System.Windows.Forms.Label();
-            this.Up = new System.Windows.Forms.Label();
-            this.Down = new System.Windows.Forms.Label();
-            this.Watering = new System.Windows.Forms.Label();
-            this.ConstP = new System.Windows.Forms.Label();
-            this.Back = new System.Windows.Forms.Label();
-            this.EndButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,8 +43,6 @@ namespace WindowsFormsApp1
             this.inputSettingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.limitSetupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label5 = new System.Windows.Forms.Label();
-            this.R0 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button12 = new System.Windows.Forms.Button();
@@ -110,20 +90,40 @@ namespace WindowsFormsApp1
             this.panel2 = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.Unloading = new System.Windows.Forms.Label();
+            this.Unload = new System.Windows.Forms.Label();
+            this.Hydrau = new System.Windows.Forms.Label();
+            this.Brake = new System.Windows.Forms.Label();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.Fan = new System.Windows.Forms.Label();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.HandBrake = new System.Windows.Forms.Label();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.Conditioner = new System.Windows.Forms.Label();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.LoadL = new System.Windows.Forms.Label();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.Watering = new System.Windows.Forms.Label();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.Up = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.Down = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.ConstP = new System.Windows.Forms.Label();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.Back = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.EndButton = new System.Windows.Forms.Button();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.R0 = new System.Windows.Forms.TextBox();
             this.aGauge1 = new System.Windows.Forms.AGauge();
             this.aGauge2 = new System.Windows.Forms.AGauge();
             this.menuStrip1.SuspendLayout();
@@ -134,6 +134,7 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.Pressure)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -147,193 +148,7 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(124, 177);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "RPM";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(111, 389);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 16);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "SPEED";
-            // 
-            // Hydrau
-            // 
-            this.Hydrau.AutoSize = true;
-            this.Hydrau.Location = new System.Drawing.Point(380, 107);
-            this.Hydrau.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Hydrau.Name = "Hydrau";
-            this.Hydrau.Size = new System.Drawing.Size(51, 16);
-            this.Hydrau.TabIndex = 3;
-            this.Hydrau.Text = "Hydrau";
-            // 
-            // Unloading
-            // 
-            this.Unloading.AutoSize = true;
-            this.Unloading.Location = new System.Drawing.Point(455, 107);
-            this.Unloading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Unloading.Name = "Unloading";
-            this.Unloading.Size = new System.Drawing.Size(69, 16);
-            this.Unloading.TabIndex = 3;
-            this.Unloading.Text = "Unloading";
-            // 
-            // Brake
-            // 
-            this.Brake.AutoSize = true;
-            this.Brake.Location = new System.Drawing.Point(529, 107);
-            this.Brake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Brake.Name = "Brake";
-            this.Brake.Size = new System.Drawing.Size(43, 16);
-            this.Brake.TabIndex = 3;
-            this.Brake.Text = "Brake";
-            // 
-            // HandBrake
-            // 
-            this.HandBrake.AutoSize = true;
-            this.HandBrake.Location = new System.Drawing.Point(604, 107);
-            this.HandBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.HandBrake.Name = "HandBrake";
-            this.HandBrake.Size = new System.Drawing.Size(79, 16);
-            this.HandBrake.TabIndex = 3;
-            this.HandBrake.Text = "Hand Brake";
-            // 
-            // LoadL
-            // 
-            this.LoadL.AutoSize = true;
-            this.LoadL.Location = new System.Drawing.Point(679, 107);
-            this.LoadL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.LoadL.Name = "LoadL";
-            this.LoadL.Size = new System.Drawing.Size(38, 16);
-            this.LoadL.TabIndex = 3;
-            this.LoadL.Text = "Load";
-            // 
-            // Unload
-            // 
-            this.Unload.AutoSize = true;
-            this.Unload.Location = new System.Drawing.Point(753, 107);
-            this.Unload.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Unload.Name = "Unload";
-            this.Unload.Size = new System.Drawing.Size(51, 16);
-            this.Unload.TabIndex = 3;
-            this.Unload.Text = "Unload";
-            // 
-            // Fan
-            // 
-            this.Fan.AutoSize = true;
-            this.Fan.Location = new System.Drawing.Point(852, 107);
-            this.Fan.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Fan.Name = "Fan";
-            this.Fan.Size = new System.Drawing.Size(30, 16);
-            this.Fan.TabIndex = 3;
-            this.Fan.Text = "Fan";
-            // 
-            // Conditioner
-            // 
-            this.Conditioner.AutoSize = true;
-            this.Conditioner.Location = new System.Drawing.Point(927, 107);
-            this.Conditioner.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Conditioner.Name = "Conditioner";
-            this.Conditioner.Size = new System.Drawing.Size(75, 16);
-            this.Conditioner.TabIndex = 3;
-            this.Conditioner.Text = "Conditioner";
-            // 
-            // Up
-            // 
-            this.Up.AutoSize = true;
-            this.Up.Location = new System.Drawing.Point(1001, 107);
-            this.Up.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Up.Name = "Up";
-            this.Up.Size = new System.Drawing.Size(25, 16);
-            this.Up.TabIndex = 3;
-            this.Up.Text = "Up";
-            // 
-            // Down
-            // 
-            this.Down.AutoSize = true;
-            this.Down.Location = new System.Drawing.Point(1076, 107);
-            this.Down.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Down.Name = "Down";
-            this.Down.Size = new System.Drawing.Size(39, 16);
-            this.Down.TabIndex = 3;
-            this.Down.Text = "down";
-            // 
-            // Watering
-            // 
-            this.Watering.AutoSize = true;
-            this.Watering.Location = new System.Drawing.Point(1151, 107);
-            this.Watering.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Watering.Name = "Watering";
-            this.Watering.Size = new System.Drawing.Size(61, 16);
-            this.Watering.TabIndex = 3;
-            this.Watering.Text = "Watering";
-            // 
-            // ConstP
-            // 
-            this.ConstP.AutoSize = true;
-            this.ConstP.Location = new System.Drawing.Point(1225, 107);
-            this.ConstP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.ConstP.Name = "ConstP";
-            this.ConstP.Size = new System.Drawing.Size(50, 16);
-            this.ConstP.TabIndex = 3;
-            this.ConstP.Text = "ConstP";
-            // 
-            // Back
-            // 
-            this.Back.AutoSize = true;
-            this.Back.Location = new System.Drawing.Point(1300, 107);
-            this.Back.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Back.Name = "Back";
-            this.Back.Size = new System.Drawing.Size(38, 16);
-            this.Back.TabIndex = 3;
-            this.Back.Text = "Back";
-            // 
-            // EndButton
-            // 
-            this.EndButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EndButton.Location = new System.Drawing.Point(1561, 42);
-            this.EndButton.Margin = new System.Windows.Forms.Padding(4);
-            this.EndButton.Name = "EndButton";
-            this.EndButton.Size = new System.Drawing.Size(100, 37);
-            this.EndButton.TabIndex = 4;
-            this.EndButton.Text = "End";
-            this.EndButton.UseVisualStyleBackColor = true;
-            this.EndButton.Click += new System.EventHandler(this.End_Click);
-            // 
-            // button2
-            // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(1453, 42);
-            this.button2.Margin = new System.Windows.Forms.Padding(4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 37);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Pause";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Location = new System.Drawing.Point(1453, 86);
-            this.button3.Margin = new System.Windows.Forms.Padding(4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(208, 43);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Stop";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // menuStrip1
             // 
@@ -346,14 +161,14 @@ namespace WindowsFormsApp1
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1827, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1827, 28);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 26);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // testToolStripMenuItem
@@ -362,20 +177,20 @@ namespace WindowsFormsApp1
             this.manualToolStripMenuItem,
             this.automaticToolStripMenuItem});
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(49, 26);
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.testToolStripMenuItem.Text = "Test";
             // 
             // manualToolStripMenuItem
             // 
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
-            this.manualToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.manualToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.manualToolStripMenuItem.Text = "Manual";
             this.manualToolStripMenuItem.Click += new System.EventHandler(this.manualToolStripMenuItem_Click);
             // 
             // automaticToolStripMenuItem
             // 
             this.automaticToolStripMenuItem.Name = "automaticToolStripMenuItem";
-            this.automaticToolStripMenuItem.Size = new System.Drawing.Size(161, 26);
+            this.automaticToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.automaticToolStripMenuItem.Text = "Automatic";
             this.automaticToolStripMenuItem.Click += new System.EventHandler(this.automaticToolStripMenuItem_Click);
             // 
@@ -385,7 +200,7 @@ namespace WindowsFormsApp1
             this.inputSettingToolStripMenuItem,
             this.limitSetupToolStripMenuItem});
             this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
-            this.settingToolStripMenuItem.Size = new System.Drawing.Size(70, 26);
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.settingToolStripMenuItem.Text = "Setting";
             // 
             // inputSettingToolStripMenuItem
@@ -403,26 +218,8 @@ namespace WindowsFormsApp1
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(288, 389);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(33, 16);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "R0 : ";
-            // 
-            // R0
-            // 
-            this.R0.Location = new System.Drawing.Point(336, 385);
-            this.R0.Margin = new System.Windows.Forms.Padding(4);
-            this.R0.Name = "R0";
-            this.R0.Size = new System.Drawing.Size(97, 22);
-            this.R0.TabIndex = 7;
             // 
             // panel1
             // 
@@ -922,6 +719,7 @@ namespace WindowsFormsApp1
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1884, 222);
             this.panel2.TabIndex = 8;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // chart1
             // 
@@ -948,126 +746,6 @@ namespace WindowsFormsApp1
             this.richTextBox1.Size = new System.Drawing.Size(703, 374);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
-            // 
-            // pictureBox13
-            // 
-            this.pictureBox13.Image = global::WindowsFormsApp1.Properties.Resources.RedLight;
-            this.pictureBox13.Location = new System.Drawing.Point(1280, 42);
-            this.pictureBox13.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox13.TabIndex = 2;
-            this.pictureBox13.TabStop = false;
-            // 
-            // pictureBox12
-            // 
-            this.pictureBox12.Location = new System.Drawing.Point(981, 42);
-            this.pictureBox12.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox12.TabIndex = 2;
-            this.pictureBox12.TabStop = false;
-            // 
-            // pictureBox8
-            // 
-            this.pictureBox8.Location = new System.Drawing.Point(907, 42);
-            this.pictureBox8.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox8.TabIndex = 2;
-            this.pictureBox8.TabStop = false;
-            // 
-            // pictureBox11
-            // 
-            this.pictureBox11.Location = new System.Drawing.Point(1205, 42);
-            this.pictureBox11.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox11.TabIndex = 2;
-            this.pictureBox11.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Location = new System.Drawing.Point(608, 42);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox4.TabIndex = 2;
-            this.pictureBox4.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            this.pictureBox10.Location = new System.Drawing.Point(1131, 42);
-            this.pictureBox10.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox10.TabIndex = 2;
-            this.pictureBox10.TabStop = false;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Location = new System.Drawing.Point(832, 42);
-            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox7.TabIndex = 2;
-            this.pictureBox7.TabStop = false;
-            // 
-            // pictureBox6
-            // 
-            this.pictureBox6.Location = new System.Drawing.Point(757, 42);
-            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox6.TabIndex = 2;
-            this.pictureBox6.TabStop = false;
-            // 
-            // pictureBox9
-            // 
-            this.pictureBox9.Location = new System.Drawing.Point(1056, 42);
-            this.pictureBox9.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox9.TabIndex = 2;
-            this.pictureBox9.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(533, 42);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox3.TabIndex = 2;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(683, 42);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox5.TabIndex = 2;
-            this.pictureBox5.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(459, 42);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.RedLight;
-            this.pictureBox1.Location = new System.Drawing.Point(384, 42);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(67, 62);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
             // 
             // panel3
             // 
@@ -1107,11 +785,346 @@ namespace WindowsFormsApp1
             this.panel3.Controls.Add(this.Unload);
             this.panel3.Controls.Add(this.Unloading);
             this.panel3.Location = new System.Drawing.Point(0, 33);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1667, 436);
             this.panel3.TabIndex = 9;
             this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
+            // 
+            // Unloading
+            // 
+            this.Unloading.AutoSize = true;
+            this.Unloading.Location = new System.Drawing.Point(373, 108);
+            this.Unloading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Unloading.Name = "Unloading";
+            this.Unloading.Size = new System.Drawing.Size(69, 16);
+            this.Unloading.TabIndex = 3;
+            this.Unloading.Text = "Unloading";
+            // 
+            // Unload
+            // 
+            this.Unload.AutoSize = true;
+            this.Unload.Location = new System.Drawing.Point(727, 106);
+            this.Unload.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Unload.Name = "Unload";
+            this.Unload.Size = new System.Drawing.Size(51, 16);
+            this.Unload.TabIndex = 3;
+            this.Unload.Text = "Unload";
+            // 
+            // Hydrau
+            // 
+            this.Hydrau.AutoSize = true;
+            this.Hydrau.Location = new System.Drawing.Point(295, 107);
+            this.Hydrau.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Hydrau.Name = "Hydrau";
+            this.Hydrau.Size = new System.Drawing.Size(51, 16);
+            this.Hydrau.TabIndex = 3;
+            this.Hydrau.Text = "Hydrau";
+            // 
+            // Brake
+            // 
+            this.Brake.AutoSize = true;
+            this.Brake.Location = new System.Drawing.Point(475, 108);
+            this.Brake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Brake.Name = "Brake";
+            this.Brake.Size = new System.Drawing.Size(43, 16);
+            this.Brake.TabIndex = 3;
+            this.Brake.Text = "Brake";
+            // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox13.Location = new System.Drawing.Point(1322, 42);
+            this.pictureBox13.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox13.TabIndex = 2;
+            this.pictureBox13.TabStop = false;
+            this.pictureBox13.Click += new System.EventHandler(this.pictureBox13_Click);
+            // 
+            // Fan
+            // 
+            this.Fan.AutoSize = true;
+            this.Fan.Location = new System.Drawing.Point(823, 106);
+            this.Fan.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Fan.Name = "Fan";
+            this.Fan.Size = new System.Drawing.Size(30, 16);
+            this.Fan.TabIndex = 3;
+            this.Fan.Text = "Fan";
+            // 
+            // pictureBox12
+            // 
+            this.pictureBox12.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox12.Location = new System.Drawing.Point(977, 42);
+            this.pictureBox12.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox12.TabIndex = 2;
+            this.pictureBox12.TabStop = false;
+            // 
+            // HandBrake
+            // 
+            this.HandBrake.AutoSize = true;
+            this.HandBrake.Location = new System.Drawing.Point(538, 108);
+            this.HandBrake.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.HandBrake.Name = "HandBrake";
+            this.HandBrake.Size = new System.Drawing.Size(79, 16);
+            this.HandBrake.TabIndex = 3;
+            this.HandBrake.Text = "Hand Brake";
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox8.Location = new System.Drawing.Point(889, 41);
+            this.pictureBox8.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox8.TabIndex = 2;
+            this.pictureBox8.TabStop = false;
+            // 
+            // Conditioner
+            // 
+            this.Conditioner.AutoSize = true;
+            this.Conditioner.Location = new System.Drawing.Point(885, 107);
+            this.Conditioner.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Conditioner.Name = "Conditioner";
+            this.Conditioner.Size = new System.Drawing.Size(75, 16);
+            this.Conditioner.TabIndex = 3;
+            this.Conditioner.Text = "Conditioner";
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox11.Location = new System.Drawing.Point(1237, 42);
+            this.pictureBox11.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox11.TabIndex = 2;
+            this.pictureBox11.TabStop = false;
+            // 
+            // LoadL
+            // 
+            this.LoadL.AutoSize = true;
+            this.LoadL.Location = new System.Drawing.Point(646, 108);
+            this.LoadL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.LoadL.Name = "LoadL";
+            this.LoadL.Size = new System.Drawing.Size(38, 16);
+            this.LoadL.TabIndex = 3;
+            this.LoadL.Text = "Load";
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox4.Location = new System.Drawing.Point(545, 42);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox4.TabIndex = 2;
+            this.pictureBox4.TabStop = false;
+            // 
+            // Watering
+            // 
+            this.Watering.AutoSize = true;
+            this.Watering.Location = new System.Drawing.Point(1155, 108);
+            this.Watering.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Watering.Name = "Watering";
+            this.Watering.Size = new System.Drawing.Size(61, 16);
+            this.Watering.TabIndex = 3;
+            this.Watering.Text = "Watering";
+            // 
+            // pictureBox10
+            // 
+            this.pictureBox10.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox10.Location = new System.Drawing.Point(1152, 42);
+            this.pictureBox10.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox10.TabIndex = 2;
+            this.pictureBox10.TabStop = false;
+            // 
+            // Up
+            // 
+            this.Up.AutoSize = true;
+            this.Up.Location = new System.Drawing.Point(998, 108);
+            this.Up.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Up.Name = "Up";
+            this.Up.Size = new System.Drawing.Size(25, 16);
+            this.Up.TabIndex = 3;
+            this.Up.Text = "Up";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox7.Location = new System.Drawing.Point(804, 42);
+            this.pictureBox7.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox7.TabIndex = 2;
+            this.pictureBox7.TabStop = false;
+            // 
+            // Down
+            // 
+            this.Down.AutoSize = true;
+            this.Down.Location = new System.Drawing.Point(1080, 108);
+            this.Down.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Down.Name = "Down";
+            this.Down.Size = new System.Drawing.Size(39, 16);
+            this.Down.TabIndex = 3;
+            this.Down.Text = "down";
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox6.Location = new System.Drawing.Point(718, 42);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox6.TabIndex = 2;
+            this.pictureBox6.TabStop = false;
+            // 
+            // ConstP
+            // 
+            this.ConstP.AutoSize = true;
+            this.ConstP.Location = new System.Drawing.Point(1246, 108);
+            this.ConstP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ConstP.Name = "ConstP";
+            this.ConstP.Size = new System.Drawing.Size(50, 16);
+            this.ConstP.TabIndex = 3;
+            this.ConstP.Text = "ConstP";
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox9.Location = new System.Drawing.Point(1066, 42);
+            this.pictureBox9.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox9.TabIndex = 2;
+            this.pictureBox9.TabStop = false;
+            // 
+            // Back
+            // 
+            this.Back.AutoSize = true;
+            this.Back.Location = new System.Drawing.Point(1337, 108);
+            this.Back.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Back.Name = "Back";
+            this.Back.Size = new System.Drawing.Size(38, 16);
+            this.Back.TabIndex = 3;
+            this.Back.Text = "Back";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox3.Location = new System.Drawing.Point(463, 41);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox3.TabIndex = 2;
+            this.pictureBox3.TabStop = false;
+            // 
+            // EndButton
+            // 
+            this.EndButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EndButton.Location = new System.Drawing.Point(1561, 42);
+            this.EndButton.Margin = new System.Windows.Forms.Padding(4);
+            this.EndButton.Name = "EndButton";
+            this.EndButton.Size = new System.Drawing.Size(100, 37);
+            this.EndButton.TabIndex = 4;
+            this.EndButton.Text = "End";
+            this.EndButton.UseVisualStyleBackColor = true;
+            this.EndButton.Click += new System.EventHandler(this.End_Click);
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox5.Location = new System.Drawing.Point(631, 42);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox5.TabIndex = 2;
+            this.pictureBox5.TabStop = false;
+            // 
+            // button3
+            // 
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button3.Location = new System.Drawing.Point(1453, 86);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(208, 43);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Stop";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox2.Location = new System.Drawing.Point(375, 42);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // button2
+            // 
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button2.Location = new System.Drawing.Point(1453, 42);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(100, 37);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Pause";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WindowsFormsApp1.Properties.Resources.RedLight_removebg_preview;
+            this.pictureBox1.Location = new System.Drawing.Point(287, 41);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(67, 62);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(111, 389);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 16);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "SPEED";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(288, 389);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(33, 16);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "R0 : ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(111, 192);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(37, 16);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "RPM";
+            // 
+            // R0
+            // 
+            this.R0.Location = new System.Drawing.Point(336, 385);
+            this.R0.Margin = new System.Windows.Forms.Padding(4);
+            this.R0.Name = "R0";
+            this.R0.Size = new System.Drawing.Size(97, 22);
+            this.R0.TabIndex = 7;
             // 
             // aGauge1
             // 
@@ -1121,7 +1134,7 @@ namespace WindowsFormsApp1
             this.aGauge1.BaseArcSweep = 180;
             this.aGauge1.BaseArcWidth = 2;
             this.aGauge1.GaugeAutoSize = false;
-            this.aGauge1.Location = new System.Drawing.Point(4, 26);
+            this.aGauge1.Location = new System.Drawing.Point(0, 42);
             this.aGauge1.Margin = new System.Windows.Forms.Padding(4);
             this.aGauge1.MaxValue = 2000F;
             this.aGauge1.MinValue = 0F;
@@ -1151,7 +1164,7 @@ namespace WindowsFormsApp1
             this.aGauge1.ScaleNumbersRotation = 0;
             this.aGauge1.ScaleNumbersStartScaleLine = 0;
             this.aGauge1.ScaleNumbersStepScaleLines = 1;
-            this.aGauge1.Size = new System.Drawing.Size(280, 148);
+            this.aGauge1.Size = new System.Drawing.Size(277, 131);
             this.aGauge1.TabIndex = 0;
             this.aGauge1.Text = "aGauge1";
             this.aGauge1.Value = 0F;
@@ -1164,8 +1177,8 @@ namespace WindowsFormsApp1
             this.aGauge2.BaseArcSweep = 180;
             this.aGauge2.BaseArcWidth = 2;
             this.aGauge2.GaugeAutoSize = false;
-            this.aGauge2.Location = new System.Drawing.Point(4, 229);
-            this.aGauge2.Margin = new System.Windows.Forms.Padding(4);
+            this.aGauge2.Location = new System.Drawing.Point(0, 229);
+            this.aGauge2.Margin = new System.Windows.Forms.Padding(0, 4, 4, 4);
             this.aGauge2.MaxValue = 160F;
             this.aGauge2.MinValue = 0F;
             this.aGauge2.Name = "aGauge2";
@@ -1194,7 +1207,7 @@ namespace WindowsFormsApp1
             this.aGauge2.ScaleNumbersRotation = 0;
             this.aGauge2.ScaleNumbersStartScaleLine = 0;
             this.aGauge2.ScaleNumbersStepScaleLines = 1;
-            this.aGauge2.Size = new System.Drawing.Size(273, 156);
+            this.aGauge2.Size = new System.Drawing.Size(277, 156);
             this.aGauge2.TabIndex = 0;
             this.aGauge2.Text = "aGauge1";
             this.aGauge2.Value = 0F;
@@ -1223,6 +1236,8 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.Pressure)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
@@ -1236,48 +1251,12 @@ namespace WindowsFormsApp1
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.AGauge aGauge1;
-        private System.Windows.Forms.AGauge aGauge2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.PictureBox pictureBox7;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.PictureBox pictureBox10;
-        private System.Windows.Forms.PictureBox pictureBox11;
-        private System.Windows.Forms.PictureBox pictureBox12;
-        private System.Windows.Forms.PictureBox pictureBox13;
-        private System.Windows.Forms.Label Hydrau;
-        private System.Windows.Forms.Label Unloading;
-        private System.Windows.Forms.Label Brake;
-        private System.Windows.Forms.Label HandBrake;
-        private System.Windows.Forms.Label LoadL;
-        private System.Windows.Forms.Label Unload;
-        private System.Windows.Forms.Label Fan;
-        private System.Windows.Forms.Label Conditioner;
-        private System.Windows.Forms.Label Up;
-        private System.Windows.Forms.Label Down;
-        private System.Windows.Forms.Label Watering;
-        private System.Windows.Forms.Label ConstP;
-        private System.Windows.Forms.Label Back;
-        private System.Windows.Forms.Button EndButton;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
@@ -1295,8 +1274,6 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button StartFanManual;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox R0;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button ConditionarManual;
         private System.Windows.Forms.TrackBar Pressure;
@@ -1334,9 +1311,44 @@ namespace WindowsFormsApp1
         private ToolStripMenuItem automaticToolStripMenuItem;
         private Button button12;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private Panel panel3;
         private ToolStripMenuItem inputSettingToolStripMenuItem;
         private ToolStripMenuItem limitSetupToolStripMenuItem;
+        private Panel panel3;
+        private AGauge aGauge1;
+        private AGauge aGauge2;
+        private TextBox R0;
+        private Label label1;
+        private Label label5;
+        private Label label2;
+        private PictureBox pictureBox1;
+        private Button button2;
+        private PictureBox pictureBox2;
+        private Button button3;
+        private PictureBox pictureBox5;
+        private Button EndButton;
+        private PictureBox pictureBox3;
+        private Label Back;
+        private PictureBox pictureBox9;
+        private Label ConstP;
+        private PictureBox pictureBox6;
+        private Label Down;
+        private PictureBox pictureBox7;
+        private Label Up;
+        private PictureBox pictureBox10;
+        private Label Watering;
+        private PictureBox pictureBox4;
+        private Label LoadL;
+        private PictureBox pictureBox11;
+        private Label Conditioner;
+        private PictureBox pictureBox8;
+        private Label HandBrake;
+        private PictureBox pictureBox12;
+        private Label Fan;
+        private PictureBox pictureBox13;
+        private Label Brake;
+        private Label Hydrau;
+        private Label Unload;
+        private Label Unloading;
     }
 }
 

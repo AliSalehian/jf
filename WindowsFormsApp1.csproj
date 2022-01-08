@@ -102,9 +102,6 @@
     <None Include="Resources\GreenLight.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\RedLight.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Down.png" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +118,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Down21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RedLight-removebg-preview.png" />
+    <Content Include="Resources\RedLight.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

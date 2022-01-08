@@ -85,6 +85,7 @@ namespace WindowsFormsApp1
 
         private void automaticToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             panel1.Visible = false;
             panel2.Visible = true;
             panel2.BringToFront();
@@ -113,23 +114,62 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox4.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox6.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox7.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox8.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox9.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox9.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox10.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox11.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox12.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox12.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            pictureBox13.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox13.SizeMode = PictureBoxSizeMode.StretchImage;
+
             FanSpeedManualUp.ImageAlign = ContentAlignment.MiddleCenter;
-            panel1.Location = new Point(0, 370);
-            panel2.Location = new Point(0, 370);
+            panel1.Location = new Point(0, 380);
+            panel2.Location = new Point(0, 380);
+            aGauge1.Location = new Point(0, 10);
+            aGauge2.Location = new Point(0, 190);
             panel2.Height = (this.Height / 2) - 20;
             panel3.Location = new Point(0, 25);
             richTextBox1.ReadOnly = true;
             richTextBox1.Width = (ClientSize.Width-90) / 2;
             chart1.Width = richTextBox1.Width;
             chart1.Height = richTextBox1.Height;
-            label1.Text = chart1.Height.ToString();
-            label2.Text = richTextBox1.Height.ToString();
             chart1.Left = richTextBox1.Width+60;
             richTextBox1.Left = 30;
             rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine());
-            panel3.Left = (ClientSize.Width - panel3.Width) / 2;
+            panel3.Location = new Point(
+            this.ClientSize.Width / 2 - panel3.Size.Width / 2, 30);
             t = new System.Threading.Thread(ReadCommands);
             t.Start();
         }
@@ -215,6 +255,16 @@ namespace WindowsFormsApp1
         }
 
         private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
