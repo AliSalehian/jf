@@ -12,6 +12,7 @@ namespace WindowsFormsApp1
         jf.Compiler compiler;
         Queue<jf.Command> commands;
         System.Threading.Thread t;
+        System.Threading.Thread t1;
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
 
         public Form1(Object compiler, Object commands)
@@ -20,6 +21,17 @@ namespace WindowsFormsApp1
             this.commands = (Queue<jf.Command>) commands;
             InitializeComponent();
         }
+        /*public void automaticFormInvoker()
+        {
+            MethodInvoker mi2 = delegate ()
+            {
+                var AutomaticTest = new AutomaticForm();
+                AutomaticTest.Show();
+
+
+            };
+            this.Invoke(mi2);
+        }*/
 
         private void PressureManualUp_Click(object sender, EventArgs e)
         {
@@ -85,7 +97,11 @@ namespace WindowsFormsApp1
 
         private void automaticToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            //t1 = new System.Threading.Thread(automaticFormInvoker);
+            //t1.SetApartmentState(System.Threading.ApartmentState.STA);
+            //t1.Start();
+            var AutomaticTest = new AutomaticForm();
+            AutomaticTest.Show();
             panel1.Visible = false;
             panel2.Visible = true;
             panel2.BringToFront();
@@ -155,6 +171,9 @@ namespace WindowsFormsApp1
             pictureBox13.SizeMode = PictureBoxSizeMode.StretchImage;
 
             FanSpeedManualUp.ImageAlign = ContentAlignment.MiddleCenter;
+            panel2.Visible = false;
+            panel1.Visible = true;
+            panel1.BringToFront();
             panel1.Location = new Point(0, 380);
             panel2.Location = new Point(0, 380);
             aGauge1.Location = new Point(0, 10);
@@ -267,6 +286,11 @@ namespace WindowsFormsApp1
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Hydrau_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 }

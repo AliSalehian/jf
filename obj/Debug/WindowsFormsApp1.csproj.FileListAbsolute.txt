@@ -39,3 +39,13 @@ C:\Users\Erfan\Desktop\jf\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cac
 C:\Users\Erfan\Desktop\jf\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Erfan\Desktop\jf\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\Erfan\Desktop\jf\obj\Debug\WindowsFormsApp1.Form2.resources
+C:\Users\Erfan\Desktop\jf-addRunner\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\Erfan\Desktop\jf-addRunner\bin\Debug\WindowsFormsApp1.exe
+C:\Users\Erfan\Desktop\jf-addRunner\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Erfan\Desktop\jf-addRunner\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Users\Erfan\Desktop\jf-addRunner\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\Erfan\Desktop\jf-addRunner\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\Erfan\Desktop\jf-addRunner\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\Erfan\Desktop\jf-addRunner\obj\Debug\WindowsFormsApp1.exe
+C:\Users\Erfan\Desktop\jf-addRunner\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Erfan\Desktop\jf-addRunner\obj\Debug\WindowsFormsApp1.AutomaticForm.resources
