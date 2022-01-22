@@ -12,7 +12,6 @@ namespace WindowsFormsApp1
         jf.Compiler compiler;
         Queue<jf.Command> commands;
         System.Threading.Thread t;
-        System.Threading.Thread t1;
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
 
 
@@ -130,6 +129,7 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Text = "JF smiulator V 1.1.2";
             this.WindowState = FormWindowState.Maximized;
 
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -301,7 +301,7 @@ namespace WindowsFormsApp1
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.ShowDialog();
+           
         }
     }
 }

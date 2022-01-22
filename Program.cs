@@ -11,7 +11,6 @@ namespace WindowsFormsApp1
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        public static event System.Threading.ThreadExceptionEventHandler ThreadException;
         static jf.Compiler compiler = new jf.Compiler();
         static Queue<jf.Command> queue = new Queue<jf.Command>();
         static jf.SensorHandler sensorHandler = new jf.SensorHandler();
