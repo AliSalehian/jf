@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace jf
+﻿namespace jf
 {
     class CustomError
     {
@@ -16,14 +10,7 @@ namespace jf
             this.message = message;
         }
 
-        public int getLineNumber()
-        {
-            return lineNumber;
-        }
-
-        public string getMessage()
-        {
-            return message;
-        }
+        public int getLineNumber(){ return lineNumber; }
+        public string getMessage(){ return message; }
     }
 }

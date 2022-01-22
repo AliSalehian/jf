@@ -8,13 +8,15 @@ namespace jf
     {
         public string identifier;
         public string attribute;
+        public int realLine;
         public List<Node> child;
         public Node parent;
 
-        public Node(string identifier, string attribute)
+        public Node(string identifier, string attribute, int realLine)
         {
             this.identifier = identifier;
             this.attribute = attribute;
+            this.realLine = realLine;
             this.child = new List<Node>();
             this.parent = null;
         }

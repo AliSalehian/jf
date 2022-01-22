@@ -6,26 +6,29 @@ CODE No.    : 18 75 034524850 - Peugeut
 CODE Factory Name : Toklantoos
 CODE Type         : Peugeut 405
 CODE Standard     : AK1 , AK2
-MODE 2
+MODE 1
 
 
-R0  0.294
+R0  0.1294
 i 40.24
 Kmu 1
-data 4, 5, 6
-data 100 ,200, 300
+data 4444, 5, 6
 BEGIN
 VAR a, 2
+VAR b, 4
+ADD a, 1
+
+
+ADD a, b
 
                 SET Pp
-	turn 1
-                FAN 50
-	 LOOP 100
-	    speed 10 ,c
+                IF t2<60
+                    turn 1
+                    FAN 50
+                ENDIF
+	 LOOP 5
              wait t3<=100
 	     SPEED 80
                     BRAKE  p=3  ,UNTIL n<=270 ,r
-	   LEND
-            turn 1
-VAR b, 3
-END dfsd
+	   LEND 1, WHILE T1<370
+END

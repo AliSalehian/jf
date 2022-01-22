@@ -24,8 +24,8 @@ namespace jf
         private readonly List<Token> tokens;
         private readonly List<string> lines;
         private readonly List<Tuple<int, string>> realLines;
-        private readonly List<Tuple<string, double>> variables;
-        private readonly List<Tuple<string, List<double>>> constants;
+        private readonly List<Tuple<string, double>> variables; // variables contains var that user created
+        private readonly List<Tuple<string, List<double>>> constants; // constants contains R0, i, kmu and data
         private readonly Explanation explanationSymbolTable = new Explanation();
         private readonly Performable performableSymboltTable = new Performable();
         private readonly List<CustomError> errors;
@@ -69,15 +69,12 @@ namespace jf
             this.FillPerformable(startOfPerformable);
         }
 
-        public List<Tuple<int, string>> getRealLine()
-        {
-            return this.realLines;
-        }
-        
-        public List<Tuple<string, List<double>>> getConstants()
-        {
-            return this.constants;
-        }
+        public Node getPerformableTableRoot(){ return this.performableSymboltTable.root; }
+        public List<Tuple<int, string>> getRealLine(){ return this.realLines; }
+        public List<Tuple<string, List<double>>> getConstants() { return this.constants; }
+        public Explanation getExplanationSymbolTable() { return this.explanationSymbolTable; }
+        public List<Tuple<string, double>> getVariables() { return this.variables; }
+        public List<CustomError> GetErrors() { return this.errors; }
 
         public string[] Tokenizer(string line)
         {
@@ -420,11 +417,12 @@ namespace jf
                 this.errors.Add(new CustomError(startLineNumber.Item1, this.allErrorsText[5]));
             }
             int i;
+            int realLineCounter = startLineNumber.Item1;
             Stack parentStack = new Stack();
             bool isEnded = false;
             string firstLine = this.realLines[startLineNumber.Item1].Item2;
             string[] result = this.Tokenizer(firstLine);
-            this.performableSymboltTable.root = new Node(result[0], result[1]);
+            this.performableSymboltTable.root = new Node(result[0], result[1], realLineCounter);
             parentStack.Push(this.performableSymboltTable.root);
             for(i = startLineNumber.Item1 + 1; i < this.realLines.Count; i++)
             {
@@ -438,7 +436,7 @@ namespace jf
                 Node current;
                 if (result[0].ToLower() != "loop" && result[0].ToLower() != "if" && result[0].ToLower() != "lend" && result[0].ToLower() != "endif")
                 {
-                    current = new Node(result[0], result[1])
+                    current = new Node(result[0], result[1], i)
                     {
                         parent = (Node)parentStack.Peek()
                     };
@@ -448,7 +446,7 @@ namespace jf
                 }
                 else if (result[0].ToLower() == "loop" || result[0].ToLower() == "if")
                 {
-                    current = new Node(result[0], result[1])
+                    current = new Node(result[0], result[1], i)
                     {
                         parent = (Node)parentStack.Peek()
                     };
@@ -475,7 +473,7 @@ namespace jf
 
                         this.errors.Add(new CustomError(i, this.allErrorsText[2]));
                     }
-                    current = new Node(result[0], result[1])
+                    current = new Node(result[0], result[1], i)
                     {
                         parent = (Node)parentStack.Peek()
                     };
@@ -507,7 +505,7 @@ namespace jf
                 this.errors.Add(new CustomError(i, this.allErrorsText[12]));
             }
 
-            if(lastLine.Length > 0)
+            if(lastLine.Length > 2)
             {
                 this.errors.Add(new CustomError(i, this.allErrorsText[13]));
             }
@@ -535,7 +533,7 @@ namespace jf
                 }
                 string[] result = this.Tokenizer(line.Item2);
                 this.chechForError(result, false, realLineCounter);
-                this.explanationSymbolTable.st.insert(result[0], result[1]);
+                this.explanationSymbolTable.st.insert(result[0], result[1], realLineCounter);
                 lineCounter++;
                 realLineCounter++;
             }

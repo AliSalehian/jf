@@ -1,0 +1,1390 @@
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
+mode 1
+r0 0.1294
+i 40.24
+kmu 1
+set Pp
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+wait condiotion satisfied
+speed 80
+end!!!
