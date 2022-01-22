@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Threading;
 
+
 namespace WindowsFormsApp1
 {
     class Program
@@ -10,12 +11,14 @@ namespace WindowsFormsApp1
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+        public static event System.Threading.ThreadExceptionEventHandler ThreadException;
         static jf.Compiler compiler = new jf.Compiler();
         static Queue<jf.Command> queue = new Queue<jf.Command>();
         static jf.SensorHandler sensorHandler = new jf.SensorHandler();
         [STAThread]
         static void Main()
         {
+
             sensorHandler.setSensor("T1", 80);
             sensorHandler.setSensor("T2", 130);
             sensorHandler.setSensor("T3", 80);
@@ -26,9 +29,11 @@ namespace WindowsFormsApp1
             backendThread.Start();
 
             Thread UIThread = new Thread(new ThreadStart(Program.runUI));
+            UIThread.SetApartmentState(ApartmentState.STA);
             UIThread.Start();
         }
 
+        [STAThread]
         public static void runUI()
         {
             Application.EnableVisualStyles();

@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         System.Threading.Thread t1;
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
 
+
         public Form1(Object compiler, Object commands)
         {
             this.compiler = (jf.Compiler) compiler;
@@ -101,7 +102,7 @@ namespace WindowsFormsApp1
             //t1.SetApartmentState(System.Threading.ApartmentState.STA);
             //t1.Start();
             var AutomaticTest = new AutomaticForm();
-            AutomaticTest.Show();
+            AutomaticTest.ShowDialog();
             panel1.Visible = false;
             panel2.Visible = true;
             panel2.BringToFront();
@@ -291,6 +292,16 @@ namespace WindowsFormsApp1
         private void Hydrau_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
         }
     }
 }
