@@ -11,27 +11,18 @@ namespace WindowsFormsApp1
     {
         jf.Compiler compiler;
         Queue<jf.Command> commands;
+        List<string> fileName;
         System.Threading.Thread t;
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
 
 
-        public Form1(Object compiler, Object commands)
+        public Form1(Object compiler, Object commands, Object fileName)
         {
             this.compiler = (jf.Compiler) compiler;
             this.commands = (Queue<jf.Command>) commands;
+            this.fileName = (List<string>)fileName;
             InitializeComponent();
         }
-        /*public void automaticFormInvoker()
-        {
-            MethodInvoker mi2 = delegate ()
-            {
-                var AutomaticTest = new AutomaticForm();
-                AutomaticTest.Show();
-
-
-            };
-            this.Invoke(mi2);
-        }*/
 
         private void PressureManualUp_Click(object sender, EventArgs e)
         {
@@ -97,10 +88,7 @@ namespace WindowsFormsApp1
 
         private void automaticToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //t1 = new System.Threading.Thread(automaticFormInvoker);
-            //t1.SetApartmentState(System.Threading.ApartmentState.STA);
-            //t1.Start();
-            var AutomaticTest = new AutomaticForm();
+            var AutomaticTest = new AutomaticForm(this.fileName);
             AutomaticTest.ShowDialog();
             panel1.Visible = false;
             panel2.Visible = true;
@@ -187,7 +175,6 @@ namespace WindowsFormsApp1
             chart1.Height = richTextBox1.Height;
             chart1.Left = richTextBox1.Width+60;
             richTextBox1.Left = 30;
-            rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine());
             panel3.Location = new Point(
             this.ClientSize.Width / 2 - panel3.Size.Width / 2, 30);
             t = new System.Threading.Thread(ReadCommands);
@@ -204,8 +191,16 @@ namespace WindowsFormsApp1
                     if (commands.Count > 0)
                     {
                         jf.Command command = this.commands.Dequeue();
-                        string[] types = command.getType().Split(' ');
-                        if (types.Contains("highlight"))
+                        string types = command.getType();
+                        if (types.Contains("create ritchbox"))
+                        {
+                            rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine());
+                        }
+                        else if(types.Contains("delete ritchbox"))
+                        {
+                            richTextBox1.Clear();
+                        }
+                        else if (types.Contains("highlight"))
                         {
                             int CommandlineNumber = command.getLineNumber();
                             int start, length;
@@ -244,11 +239,11 @@ namespace WindowsFormsApp1
                             richTextBox1.SelectionBackColor = command.getBgColor();
                             counter++;
                         }
-                        if(types.Contains("test"))
+                        else if(types.Contains("test"))
                         {
                             richTextBox1.AppendText(command.getNewLine());
                         }
-                        if (types.Contains("set"))
+                        else if (types.Contains("set"))
                         {
                             R0.Text = command.getNewLine();
                             R0.ReadOnly = true;

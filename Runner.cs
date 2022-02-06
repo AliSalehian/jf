@@ -139,7 +139,7 @@ namespace jf
             return false;
         }
 
-        public void run()
+        public int run()
         {
             bool errorDetected = false;
             int lineCounter = 0;
@@ -659,6 +659,7 @@ namespace jf
                     }
                 }
             }
+            return 1;
         }
     }
 }

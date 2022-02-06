@@ -59,3 +59,4 @@ E:\dynanometer\jf\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
 E:\dynanometer\jf\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
 E:\dynanometer\jf\obj\Debug\WindowsFormsApp1.exe
 E:\dynanometer\jf\obj\Debug\WindowsFormsApp1.pdb
+D:\work\jf\code\jf\obj\Debug\WindowsFormsApp1.AutomaticForm.resources

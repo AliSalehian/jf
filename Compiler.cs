@@ -21,14 +21,15 @@ namespace jf
             }
         }
 
-        private readonly List<Token> tokens;
-        private readonly List<string> lines;
-        private readonly List<Tuple<int, string>> realLines;
-        private readonly List<Tuple<string, double>> variables; // variables contains var that user created
-        private readonly List<Tuple<string, List<double>>> constants; // constants contains R0, i, kmu and data
-        private readonly Explanation explanationSymbolTable = new Explanation();
-        private readonly Performable performableSymboltTable = new Performable();
-        private readonly List<CustomError> errors;
+        Queue<jf.Command> commands;
+        private List<Token> tokens;
+        private List<string> lines;
+        private List<Tuple<int, string>> realLines;
+        private List<Tuple<string, double>> variables; // variables contains var that user created
+        private List<Tuple<string, List<double>>> constants; // constants contains R0, i, kmu and data
+        private Explanation explanationSymbolTable = new Explanation();
+        private Performable performableSymboltTable = new Performable();
+        private List<CustomError> errors;
         private Dictionary<int, string> allErrorsText = new Dictionary<int, string>()
         {
             {0,  "no error"},
@@ -55,19 +56,7 @@ namespace jf
             {100, "too many attribute"}
         };
 
-        public Compiler()
-        {
-            Tuple<int, int> startOfPerformable;
-            this.tokens = new List<Token>();
-            this.lines = new List<String>();
-            this.realLines = new List<Tuple<int, string>>();
-            this.errors = new List<CustomError>();
-            this.variables = new List<Tuple<string, double>>();
-            this.constants = new List<Tuple<string, List<double>>>();
-            this.Lineizer("example.txt");
-            startOfPerformable = this.FillExplanation();
-            this.FillPerformable(startOfPerformable);
-        }
+        public Compiler(){}
 
         public Node getPerformableTableRoot(){ return this.performableSymboltTable.root; }
         public List<Tuple<int, string>> getRealLine(){ return this.realLines; }
@@ -75,6 +64,22 @@ namespace jf
         public Explanation getExplanationSymbolTable() { return this.explanationSymbolTable; }
         public List<Tuple<string, double>> getVariables() { return this.variables; }
         public List<CustomError> GetErrors() { return this.errors; }
+
+        public void compile(string absolutePath, Object queue)
+        {
+            this.commands = (Queue<jf.Command>) queue;
+            Tuple<int, int> startOfPerformable;
+            this.tokens = new List<Token>();
+            this.lines = new List<String>();
+            this.realLines = new List<Tuple<int, string>>();
+            this.errors = new List<CustomError>();
+            this.variables = new List<Tuple<string, double>>();
+            this.constants = new List<Tuple<string, List<double>>>();
+            this.Lineizer(absolutePath);
+            startOfPerformable = this.FillExplanation();
+            this.FillPerformable(startOfPerformable);
+            this.commands.Enqueue(new Command("create ritchbox"));
+        }
 
         public string[] Tokenizer(string line)
         {
@@ -88,11 +93,11 @@ namespace jf
             return result;
         } 
 
-        public void Lineizer(string fileName)
+        public void Lineizer(string absolutePath)
         {
             int lineNumber = 0;
             int realLineNumber = 0;
-            using (StreamReader sr = new StreamReader("../../" + fileName))
+            using (StreamReader sr = new StreamReader(absolutePath))
             {
                 while(sr.Peek() >= 0)
                 {

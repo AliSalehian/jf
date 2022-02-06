@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
         int Position;
 
         //Reads input from selected file and stores into ReadFunctions Array;
-            public int lines = new StreamReader("../../example.txt").ReadToEnd().Split(new char[] { '\n' }).Length;
+        public int lines = new StreamReader("../../example.txt").ReadToEnd().Split(new char[] { '\n' }).Length;
         public void ReadInput(string fileName)
         {
             using (StreamReader r = new StreamReader(fileName))

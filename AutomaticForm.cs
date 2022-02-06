@@ -17,9 +17,16 @@ namespace WindowsFormsApp1
         int temp = 1;
         string addedButtonNumber = "addedButton";
         string addedLabelNumber = "addedLabel";
+        List<string> fileName;
+        string[] fileNames = new string[10];
 
-        public AutomaticForm()
+        public AutomaticForm(Object fileName)
         {
+            this.fileName = (List<string>)fileName;
+            for (int i = 0; i < this.fileNames.Length; i++)
+            {
+                this.fileNames[i] = "";
+            }
             InitializeComponent();
         }
 
@@ -39,6 +46,7 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label1.Text = openFileDialog.SafeFileName;
+                    this.fileNames[0] = openFileDialog.FileName;
                 }
             }
         }
@@ -71,9 +79,6 @@ namespace WindowsFormsApp1
             addedButton.Height = 20;
             addedButton.Width = 55;
             addedButton.Text = temp.ToString();
-
-
-
             //add even handler for button
             //foreach (Button BTN in LB) // <- this is a globaly declared List<Button>
             //{
@@ -84,15 +89,11 @@ namespace WindowsFormsApp1
             //
             //
 
-
-
             temp++;
             Controls.Add(addedButton);
             Controls.Add(addedlabel);
             addedLabelNumber = "addedLabel";
             addedButtonNumber = "addedButton";
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -106,6 +107,7 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label2.Text = openFileDialog.SafeFileName;
+                    this.fileNames[1] = openFileDialog.FileName;
                 }
             }
         }
@@ -121,6 +123,7 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label3.Text = openFileDialog.SafeFileName;
+                    this.fileNames[2] = openFileDialog.FileName;
                 }
             }
         }
@@ -136,6 +139,7 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label4.Text = openFileDialog.SafeFileName;
+                    this.fileNames[3] = openFileDialog.FileName;
                 }
             }
         }
@@ -151,6 +155,7 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label5.Text = openFileDialog.SafeFileName;
+                    this.fileNames[4] = openFileDialog.FileName;
                 }
             }
         }
@@ -166,6 +171,8 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label6.Text = openFileDialog.SafeFileName;
+
+                    this.fileNames[5] = openFileDialog.FileName;
                 }
             }
         }
@@ -181,6 +188,7 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label7.Text = openFileDialog.SafeFileName;
+                    this.fileNames[6] = openFileDialog.FileName;
                 }
             }
         }
@@ -196,6 +204,7 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label8.Text = openFileDialog.SafeFileName;
+                    this.fileNames[7] = openFileDialog.FileName;
                 }
             }
         }
@@ -211,6 +220,8 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label9.Text = openFileDialog.SafeFileName;
+
+                    this.fileNames[8] = openFileDialog.FileName;
                 }
             }
         }
@@ -226,8 +237,21 @@ namespace WindowsFormsApp1
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     label10.Text = openFileDialog.SafeFileName;
+                    this.fileNames[9] = openFileDialog.FileName;
                 }
             }
+        }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.fileNames.Length; i++)
+            {
+                if(fileNames[i] != "")
+                {
+                    this.fileName.Add(fileNames[i]);
+                }
+            }
+            this.Close();
         }
     }
 }

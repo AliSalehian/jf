@@ -26,6 +26,11 @@ namespace jf
             this.bgColor = bgColor;
         }
 
+        public Command(string type)
+        {
+            this.type=type;
+        }
+
         public string getType(){ return type; }
         public void setType(string type){ this.type = type; }
 
