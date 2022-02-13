@@ -5,14 +5,44 @@ using System.IO;
 
 namespace jf
 {
+
+    /// <summary>
+    /// Class <c>Compiler</c> is comiler of JF122. its compile code, create symbol tables
+    /// save variables, constants and arrays in a searchable format and detect compile time
+    /// error of file
+    /// </summary>
     class Compiler
     {
+
+        /// <summary>
+        /// Class <c>Token</c> save 3 property of token. its value, number of line that this token 
+        /// exist in code and index of this token in that line
+        /// </summary>
         public class Token
         {
+
+            /// <summary>
+            /// Instance variable <c>value</c> is a string and represents value of <c>Token</c> 
+            /// </summary>
             public string value;
+
+            /// <summary>
+            /// Instance variable <c>lineNumber</c> is an integer and represent line number of <c>Token</c>
+            /// </summary>
             public int lineNumber;
+
+            /// <summary>
+            /// Instance variable <c>indexInLine</c> is an integer and represent position of <c>Token</c> in line
+            /// </summary>
             public int indexInLine;
 
+            /// <summary>
+            /// this constructor initializes new token with 
+            /// (<paramref name="value"/>, <paramref name="lineNumber"/>, <paramref name="indexInLine"/>)
+            /// </summary>
+            /// <param name="value"> is value of token</param>
+            /// <param name="lineNumber"> is number of line that this token exist in code</param>
+            /// <param name="indexInLine">is number of index in line that this token exist</param>
             public Token(string value, int lineNumber, int indexInLine)
             {
                 this.value = value;
@@ -21,15 +51,65 @@ namespace jf
             }
         }
 
+        /// <summary>
+        /// <c>commands</c> is a queue that is a proxy between UI and backend part of program.
+        /// <c>Compiler</c> use this proxy to send codes to UI
+        /// </summary>
         Queue<jf.Command> commands;
+
+        /// <summary>
+        /// <c>tokens</c> is a generic list of <c>Token</c>s that contains all tokens of code 
+        /// </summary>
         private List<Token> tokens;
+
+        /// <summary>
+        /// <c>lines</c> is a generic list of strings that contains lines of code without empty lines
+        /// </summary>
         private List<string> lines;
+
+        /// <summary>
+        /// <c>realLines</c> is a generic list of Tuple. each Tuple contains an integer and a string.
+        /// integer is number of line and string is it value
+        /// this list contains empty and filled line
+        /// </summary>
         private List<Tuple<int, string>> realLines;
-        private List<Tuple<string, double>> variables; // variables contains var that user created
-        private List<Tuple<string, List<double>>> constants; // constants contains R0, i, kmu and data
+
+        /// <summary>
+        /// <c>variables</c> is a generic list of Tuple that contains var that user created in code
+        /// each Tuple contains a string and a double. string is name of variable and double is
+        /// value of it
+        /// </summary>
+        private List<Tuple<string, double>> variables;
+
+        /// <summary>
+        /// <c>constants</c> is a generic list of Tuple that contains R0, i, mku and data in code
+        /// each Tuple contains a sring and a generic list of double. string is name of that constant
+        /// list of doubles is values of that constant. for R0, i and kmu its just a singel value (a list with one value)
+        /// but for data its have several values
+        /// </summary>
+        private List<Tuple<string, List<double>>> constants;
+
+        /// <summary>
+        /// <c>explanationSymbolTable</c> is an instance of <c>Explanation</c> class and contains symbol table of explanation part of code
+        /// all lines befor BEFORE in code is explanation part. this part of code is just configuration and details about code
+        /// its has no run code lines
+        /// </summary>
         private Explanation explanationSymbolTable = new Explanation();
+
+        /// <summary>
+        /// <c>performableSymboltTable</c> is an instance of <c>Performable</c> class and contains symbol table of performable part of code
+        /// all lines after BEFORE in code is performable part. this part of code is runnig phase of code. its use sesnsors values and create commands for hardware
+        /// </summary>
         private Performable performableSymboltTable = new Performable();
+
+        /// <summary>
+        /// <c>errors</c> is a generic list of <c>CustomError</c> objects. its contains error of code. if this list contains no error, runner can work and run the code 
+        /// </summary>
         private List<CustomError> errors;
+
+        /// <summary>
+        /// <c>allErrorsText</c> is a dictionary that contains errors text. we have 20 errors. 0 means no error found in code
+        /// </summary>
         private Dictionary<int, string> allErrorsText = new Dictionary<int, string>()
         {
             {0,  "no error"},
@@ -58,6 +138,10 @@ namespace jf
 
         public Compiler(){}
 
+        /// <summary>
+        /// <c>getPerformableTableRoot</c> method is getter of <c>performableSymboltTable</c> root node
+        /// </summary>
+        /// <returns>return a Node that is root of performable symbol table</returns>
         public Node getPerformableTableRoot(){ return this.performableSymboltTable.root; }
         public List<Tuple<int, string>> getRealLine(){ return this.realLines; }
         public List<Tuple<string, List<double>>> getConstants() { return this.constants; }

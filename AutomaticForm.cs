@@ -13,7 +13,6 @@ namespace WindowsFormsApp1
 {
     public partial class AutomaticForm : Form
     {
-        System.Threading.Thread t1;
         int temp = 1;
         string addedButtonNumber = "addedButton";
         string addedLabelNumber = "addedLabel";
