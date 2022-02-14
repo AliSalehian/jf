@@ -14,6 +14,7 @@ namespace jf
     class Compiler
     {
 
+        #region Token Class
         /// <summary>
         /// Class <c>Token</c> save 3 property of token. its value, number of line that this token 
         /// exist in code and index of this token in that line
@@ -50,7 +51,9 @@ namespace jf
                 this.indexInLine = indexInLine;
             }
         }
+        #endregion
 
+        #region Attributes Of Class
         /// <summary>
         /// <c>commands</c> is a queue that is a proxy between UI and backend part of program.
         /// <c>Compiler</c> use this proxy to send codes to UI
@@ -136,6 +139,9 @@ namespace jf
             {100, "too many attribute"}
         };
 
+        #endregion
+
+        #region Methods Of Class
         public Compiler(){}
 
         /// <summary>
@@ -931,6 +937,8 @@ namespace jf
              */
             return Tuple.Create(-1, -1);
         }
+
+        #endregion
 
         #region Test Method
         public static void Print(Compiler c)
