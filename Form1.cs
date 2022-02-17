@@ -9,13 +9,43 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        #region Attributes Of Class
+
+        /// <summary>
+        /// <c>compiler</c> attribute is an object of <c>jf.Compiler</c> class.
+        /// its a global variable and sent to this class from <c>Program</c> class
+        /// </summary>
         jf.Compiler compiler;
+
+        /// <summary>
+        /// <c>commands</c> attribute is a queue that contains command for UI that
+        /// created by backend part of program. its a global variable and sent to this
+        /// class from <c>Program</c> class
+        /// </summary>
         Queue<jf.Command> commands;
+
+        /// <summary>
+        /// <c>fileName</c> attribute is a list of string that created by this class
+        /// and contains list of absolute path of all code files that user choosed to
+        /// run. this attribute is a global attribute and will used by <c>jf.Compiler</c>
+        /// and <c>jf.Runner</c> class and tell them what code that they should comile and run.
+        /// </summary>
         List<string> fileName;
+
+        /// <summary>
+        /// <c>t</c> attribute is a thread that we use to check queue of commands that backend part
+        /// of program fill it with commands.
+        /// </summary>
         System.Threading.Thread t;
+
+        /// <summary>
+        /// <c>rtbh</c> attribute is an object of <c>richtextBoxHighlighter</c> class.
+        /// we use it to control text box of code that we display codes to user
+        /// </summary>
         richtextBoxHighlighter rtbh = new richtextBoxHighlighter();
+        #endregion
 
-
+        #region Constructors Of Class
         public Form1(Object compiler, Object commands, Object fileName)
         {
             this.compiler = (jf.Compiler) compiler;
@@ -23,101 +53,23 @@ namespace WindowsFormsApp1
             this.fileName = (List<string>)fileName;
             InitializeComponent();
         }
+        #endregion
 
-        private void PressureManualUp_Click(object sender, EventArgs e)
-        {
-            Pressure.Value++;
-        }
+        #region Methods Of Class
 
-        private void PressureManualDown_Click(object sender, EventArgs e)
-        {
-            if (Pressure.Value>0)
-            {
-            Pressure.Value--;
-            }
-        }
-
-        private void TorqueManualUp_Click(object sender, EventArgs e)
-        {
-            Torque.Value++;
-        }
-
-        private void TorqueManualDown_Click(object sender, EventArgs e)
-        {
-            if (Torque.Value>0)
-            {
-                Torque.Value--;
-            }
-        }
-
-        private void FanSpeedManualUp_Click(object sender, EventArgs e)
-        {
-            if (FanBar.Value<100)
-            {
-                FanBar.Value++;
-            }
-        }
-
-        private void FanSpeedManualDown_Click(object sender, EventArgs e)
-        {
-            if (FanBar.Value>0)
-            {
-                FanBar.Value--;
-            }
-        }
-
-        private void SpeedManualUp_Click(object sender, EventArgs e)
-        {
-            speed.Value++;
-        }
-
-        private void SpeedManualDown_Click(object sender, EventArgs e)
-        {
-            if (speed.Value>0)
-            {
-                speed.Value--;
-            }
-        }
-
-        private void manualToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            panel2.Visible = false;
-            panel1.Visible = true;
-            panel1.BringToFront();
-        }
-
-        private void automaticToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var AutomaticTest = new AutomaticForm(this.fileName);
-            AutomaticTest.ShowDialog();
-            panel1.Visible = false;
-            panel2.Visible = true;
-            panel2.BringToFront();
-        }
-
-        private void Pressure_ValueChanged(object sender, EventArgs e)
-        {
-            label6.Text = "Pressure["+Pressure.Value.ToString()+"MPa]";
-        }
-
-        private void FanBar_ValueChanged(object sender, EventArgs e)
-        {
-            label9.Text = "Fan Speed [%" + FanBar.Value.ToString() + "]";
-        }
-
-        private void Torque_ValueChanged(object sender, EventArgs e)
-        {
-            label7.Text = "Torque[" + Torque.Value.ToString() + "NM]";
-        }
-
-        private void speed_ValueChanged(object sender, EventArgs e)
-        {
-            label8.Text = "Speed[" + speed.Value.ToString() + "N/min]";
-        }
-
+        /// <summary>
+        /// <c>Form1_Load</c> method run when this Form load. we initialize some variables
+        /// and configure something in it.
+        /// (<paramref name="sender"/>, <paramref name="e"/>)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Text = "JF smiulator V 1.1.2";
+            // version of program
+            this.Text = "JF smiulator V 2.0";
+
+            #region Set Size Of Images
             this.WindowState = FormWindowState.Maximized;
 
             pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -158,7 +110,9 @@ namespace WindowsFormsApp1
 
             pictureBox13.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox13.SizeMode = PictureBoxSizeMode.StretchImage;
+            #endregion
 
+            #region Set Position Of Elements In Form
             FanSpeedManualUp.ImageAlign = ContentAlignment.MiddleCenter;
             panel2.Visible = false;
             panel1.Visible = true;
@@ -177,10 +131,17 @@ namespace WindowsFormsApp1
             richTextBox1.Left = 30;
             panel3.Location = new Point(
             this.ClientSize.Width / 2 - panel3.Size.Width / 2, 30);
+            #endregion
+
+            // start thread that check queue of command that filled by backend
             t = new System.Threading.Thread(ReadCommands);
             t.Start();
         }
 
+        /// <summary>
+        /// <c>ReadCommands</c> method read commands that backend part of project
+        /// created and we should display it in UI
+        /// </summary>
         private void ReadCommands()
         {
             int counter = 0;
@@ -192,14 +153,22 @@ namespace WindowsFormsApp1
                     {
                         jf.Command command = this.commands.Dequeue();
                         string types = command.getType();
+
+                        #region Create Ritch Box Command
                         if (types.Contains("create ritchbox"))
                         {
                             rtbh.WriteFromCompilerToRichTextBox(richTextBox1, compiler.getRealLine());
                         }
-                        else if(types.Contains("delete ritchbox"))
+                        #endregion
+
+                        #region Delete Ritch Box Command
+                        else if (types.Contains("delete ritchbox"))
                         {
                             richTextBox1.Clear();
                         }
+                        #endregion
+
+                        #region HighLight Command
                         else if (types.Contains("highlight"))
                         {
                             int CommandlineNumber = command.getLineNumber();
@@ -239,20 +208,121 @@ namespace WindowsFormsApp1
                             richTextBox1.SelectionBackColor = command.getBgColor();
                             counter++;
                         }
-                        else if(types.Contains("test"))
+                        #endregion
+
+                        #region Test Command
+                        else if (types.Contains("test"))
                         {
                             richTextBox1.AppendText(command.getNewLine());
                         }
+                        #endregion
+
+                        #region Set Command
                         else if (types.Contains("set"))
                         {
                             R0.Text = command.getNewLine();
                             R0.ReadOnly = true;
                         }
+                        #endregion
                     }
                 };
                 this.Invoke(mi);
             }
         }
+        #endregion
+
+        #region Event Handlers
+        private void PressureManualUp_Click(object sender, EventArgs e)
+        {
+            Pressure.Value++;
+        }
+
+        private void PressureManualDown_Click(object sender, EventArgs e)
+        {
+            if (Pressure.Value > 0)
+            {
+                Pressure.Value--;
+            }
+        }
+
+        private void TorqueManualUp_Click(object sender, EventArgs e)
+        {
+            Torque.Value++;
+        }
+
+        private void TorqueManualDown_Click(object sender, EventArgs e)
+        {
+            if (Torque.Value > 0)
+            {
+                Torque.Value--;
+            }
+        }
+
+        private void FanSpeedManualUp_Click(object sender, EventArgs e)
+        {
+            if (FanBar.Value < 100)
+            {
+                FanBar.Value++;
+            }
+        }
+
+        private void FanSpeedManualDown_Click(object sender, EventArgs e)
+        {
+            if (FanBar.Value > 0)
+            {
+                FanBar.Value--;
+            }
+        }
+
+        private void SpeedManualUp_Click(object sender, EventArgs e)
+        {
+            speed.Value++;
+        }
+
+        private void SpeedManualDown_Click(object sender, EventArgs e)
+        {
+            if (speed.Value > 0)
+            {
+                speed.Value--;
+            }
+        }
+
+        private void manualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            panel2.Visible = false;
+            panel1.Visible = true;
+            panel1.BringToFront();
+        }
+
+        private void automaticToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var AutomaticTest = new AutomaticForm(this.fileName);
+            AutomaticTest.ShowDialog();
+            panel1.Visible = false;
+            panel2.Visible = true;
+            panel2.BringToFront();
+        }
+
+        private void Pressure_ValueChanged(object sender, EventArgs e)
+        {
+            label6.Text = "Pressure[" + Pressure.Value.ToString() + "MPa]";
+        }
+
+        private void FanBar_ValueChanged(object sender, EventArgs e)
+        {
+            label9.Text = "Fan Speed [%" + FanBar.Value.ToString() + "]";
+        }
+
+        private void Torque_ValueChanged(object sender, EventArgs e)
+        {
+            label7.Text = "Torque[" + Torque.Value.ToString() + "NM]";
+        }
+
+        private void speed_ValueChanged(object sender, EventArgs e)
+        {
+            label8.Text = "Speed[" + speed.Value.ToString() + "N/min]";
+        }
+
 
         private void End_Click(object sender, EventArgs e)
         {
@@ -298,5 +368,11 @@ namespace WindowsFormsApp1
         {
            
         }
+
+        private void aGauge1_ValueInRangeChanged(object sender, ValueInRangeChangedEventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
