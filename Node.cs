@@ -4,14 +4,42 @@ using System.Collections;
 
 namespace jf
 {
+    /// <summary>
+    /// class <c>Node</c> will use in creating tree for symbol table for performable
+    /// part of code
+    /// </summary>
     class Node
     {
-        public string identifier;
-        public string attribute;
-        public int realLine;
-        public List<Node> child;
-        public Node parent;
+        #region Attribute Of Class
 
+        /// <summary>
+        /// <c>identifier</c> attribute is a string and save identifer (keyword) of <c>Node</c>
+        /// </summary>
+        public string identifier;
+
+        /// <summary>
+        /// <c>attribute</c> attribute is a string and save attribute of <c>Node</c>
+        /// </summary>
+        public string attribute;
+
+        /// <summary>
+        /// <c>realLine</c> attribute is an integer and save number of real line (count empty lines)
+        /// of that this node accured in code
+        /// </summary>
+        public int realLine;
+
+        /// <summary>
+        /// <c>child</c> attribute is a list of <c>Node</c> objects and save child of this <c>Node</c>
+        /// </summary>
+        public List<Node> child;
+
+        /// <summary>
+        /// <c>parent</c> attribute is an object of <c>Node</c> class and save parent of current <c>Node</c>
+        /// </summary>
+        public Node parent;
+        #endregion
+
+        #region Constructor Of Class
         public Node(string identifier, string attribute, int realLine)
         {
             this.identifier = identifier;
@@ -20,7 +48,17 @@ namespace jf
             this.child = new List<Node>();
             this.parent = null;
         }
+        #endregion
 
+        #region Methods Of Class
+
+        /// <summary>
+        /// <c>printTree</c> method is a test method that print a tree. its important 
+        /// becuase we iterate tree in this method and we use this mecanism of tree iteration
+        /// in <c>jf.Runner</c> class to run performable part of code
+        /// (<paramref name="root"/>)
+        /// </summary>
+        /// <param name="root">is an object of <c>Node</c> class that is root of tree</param>
         public static void printTree(Node root)
         {
             if(root == null) return;
@@ -68,5 +106,6 @@ namespace jf
                 }
             }
         }
+        #endregion
     }
 }

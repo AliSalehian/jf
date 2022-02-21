@@ -2,6 +2,10 @@
 
 namespace jf
 {
+    /// <summary>
+    /// class <c>SymbolTable</c> is a class that we use it to save symbol table
+    /// of explanation part of code
+    /// </summary>
     class SymbolTable
     {
         public List<string[]> table = new List<string[]>();
