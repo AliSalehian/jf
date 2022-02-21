@@ -201,6 +201,7 @@ namespace jf
 
             #region Create Tokens And Symbol Tables
             this.Lineizer(absolutePath);
+            // TODO : bring not begin keyword here and run fillPerformable if we have have begin keyword
             startOfPerformable = this.FillExplanation();
             this.FillPerformable(startOfPerformable);
             #endregion
