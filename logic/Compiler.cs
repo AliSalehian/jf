@@ -136,6 +136,28 @@ namespace jf
             {18, "this value is not defined"},
             {19, "RESTORE has no attribute"},
             {20, "SET value sould be 'pp' or 'pm'"},
+            {21, "R0 value should be a true number" },
+            {22, "DATA should contains at least one number" },
+            {23, "ADD value should contains variables or numbers but there is nothing!" },
+            {24, "SET should contains one value" },
+            {25, "SPEED should contains one value" },
+            {26, "SPEED attribute should be number or variable" },
+            {27, "BRAKE should contains one value" },
+            {28, "BRAKE flag should be r" },
+            {29, "BRAKE work with constant moment or constant pressure so first letter of attribute should be m or p" },
+            {30, "in BRAKE attribute after 'm' or 'p' character we should have '=' character but we dont have"},
+            {31, "BRAKE value is not number or variable name"},
+            {32, "in BRAKE attribute before condition part we need 'until' keyword"},
+            {33, "in BRAKE condition there is an error"},
+            {34, "SPEED has 1 or 2 attribute but we have more than 2 attribute"},
+            {35, "SPEED flag is 'c'"},
+            {36, "WAIT condition has an error"},
+            {37, "LOOP value should be number or name of a variable"},
+            {38, "time of LOOP should be a number"},
+            {39, "there is an error in LEND condition"},
+            {40, "there is an error in IF condition"},
+            {41, "WATER attribute should be '0' or '1'"},
+            {42, "FAN attribute should be number"},
             {100, "too many attribute"}
         };
 
@@ -386,6 +408,142 @@ namespace jf
         }
 
         /// <summary>
+        /// <c>checkForConditionError</c> method check conditions for errors
+        /// (<paramref name="condition"/>)
+        /// </summary>
+        /// <param name="condition">is a string that contains operand1, operand2 and comparision operator</param>
+        /// <returns>return false if we have error otherwise return true</returns>
+        public bool checkForConditionError(string condition)
+        {
+            // each condtion has 2 operand
+            string operand1;
+            string operand2;
+
+            // each condition has one operator
+            string comparisionOperator = "";
+
+            /* operand1 and operand2 are string, we should convert them to double and for this
+             * purpose we need two double variables
+             */
+            double valueOfOperand1;
+            double valueOfOperand2;
+
+            #region check comarision operator
+            // fill comparisionOperator variable
+            if (condition.Contains("<="))
+            {
+                comparisionOperator = "<=";
+            }
+            else if (condition.Contains(">="))
+            {
+                comparisionOperator = ">=";
+            }
+            else if (condition.Contains("="))
+            {
+                comparisionOperator = "=";
+            }
+            else if (condition.Contains(">"))
+            {
+                comparisionOperator = ">";
+            }
+            else if (condition.Contains("<"))
+            {
+                comparisionOperator = "<";
+            }
+            else
+            {
+                return false;
+            }
+            #endregion
+
+            // split condition string based on comparisionOperator variable
+            string[] temp = condition.Split(new string[] { comparisionOperator }, StringSplitOptions.None);
+
+            // first string gonna be our first operand
+            operand1 = temp[0].Trim();
+
+            // second string gonna be our second operand
+            operand2 = temp[1].Trim();
+
+            #region check operand 1
+            /* first operand can be a double (pure number)
+             * or a string. this if fill valueOfOperand1 if our first operand be a 
+             * number. its just convert it to double
+             */
+            if (!Char.IsLetter(operand1[0]))
+            {
+                if (double.TryParse(operand1, out valueOfOperand1) == false)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                bool isItInDefined = false;
+                string[] sensorsNameList = { "p", "m" , "n", "f", "t1", "t2", "t3", "time" };
+                foreach (Tuple<string, double> t in this.variables)
+                {
+                    if (t.Item1 == operand1)
+                    {
+                        isItInDefined = true;
+                        break;
+                    }
+                }
+                foreach (string sensorName in sensorsNameList)
+                {
+                    if (sensorName == operand1.ToLower())
+                    {
+                        isItInDefined = true;
+                        break;
+                    }
+                }
+                if (isItInDefined == false)
+                {
+                    return false;
+                }
+            }
+            #endregion
+
+            #region check operand 2
+            // repeat what we did for operand 1
+            if (!Char.IsLetter(operand2[0]))
+            {
+                if (double.TryParse(operand2, out valueOfOperand2) == false)
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                bool isItInDefined = false;
+                string[] sensorsNameList = { "p", "m", "n", "f", "t1", "t2", "t3", "time" };
+                foreach (Tuple<string, double> t in this.variables)
+                {
+                    if (t.Item1 == operand2)
+                    {
+                        isItInDefined = true;
+                        break;
+                    }
+                }
+                foreach (string sensorName in sensorsNameList)
+                {
+                    if (sensorName == operand2.ToLower())
+                    {
+                        isItInDefined = true;
+                        break;
+                    }
+                }
+                if (isItInDefined == false)
+                {
+                    return false;
+                }
+            }
+            #endregion
+
+            return true;
+        }
+
+        /// <summary>
         /// <c>chechForError</c> method detect all compile time errors in code and add them all to <c>errors</c>
         /// (<paramref name="identifierAndAttribute"/>, <paramref name="isPerformable"/>, <paramref name="lineNumber"/>)
         /// </summary>
@@ -406,6 +564,7 @@ namespace jf
                         if (identifierAndAttribute[1] != "0" && identifierAndAttribute[1] != "1")
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[6]));
+                            break;
                         }
 
                         /* if identifier is mode keywords, its just have one attribute so length of 
@@ -414,6 +573,7 @@ namespace jf
                         if (identifierAndAttribute.Length > 2)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
                         }
 
                         // mode is a constant of code and it should save in constants list
@@ -434,6 +594,7 @@ namespace jf
                         if (double.TryParse(identifierAndAttribute[1], out number) == false)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[7]));
+                            break;
                         }
 
                         /* if identifier is r0 keywords, its just have one attribute so length of 
@@ -442,12 +603,21 @@ namespace jf
                         if (identifierAndAttribute.Length > 2)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
                         }
 
                         // r0 is a constant of code and it should save in constants list
                         constValue = new List<double>();
                         constValue.Clear();
                         constValue.Add(double.Parse(identifierAndAttribute[1]));
+
+                        // r0 value should be a true number and it can't be negetive number
+                        if (constValue[0] < 0)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[21]));
+                            break;
+                        }
+
                         this.constants.Add(Tuple.Create(identifierAndAttribute[0], constValue));
                         break;
                     #endregion
@@ -461,6 +631,7 @@ namespace jf
                         if (double.TryParse(identifierAndAttribute[1], out number) == false)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[8]));
+                            break;
                         }
 
                         /* if identifier is i keywords, its just have one attribute so length of 
@@ -469,6 +640,7 @@ namespace jf
                         if (identifierAndAttribute.Length > 2)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
                         }
 
                         // i is a constant of code and it should save in constants list
@@ -488,6 +660,7 @@ namespace jf
                         if (double.TryParse(identifierAndAttribute[1], out number) == false)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[9]));
+                            break;
                         }
 
                         /* if identifier is kmu keywords, its just have one attribute so length of 
@@ -496,6 +669,7 @@ namespace jf
                         if (identifierAndAttribute.Length > 2)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
                         }
 
                         // kmu is a constant of code and it should save in constants list
@@ -508,6 +682,16 @@ namespace jf
 
                     #region data Keyword Errors
                     case "data":
+
+                        /* data keyword has a list of number and this list is seperated
+                         * from data keyword with one blank space, if there is no list of numbers
+                         * its an error and we check it here
+                         */
+                        if (identifierAndAttribute.Length < 2 || identifierAndAttribute[1] == null)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[22]));
+                            break;
+                        }
 
                         /* attribute of data keyword is one or more numbers that are separated by ,
                          * so we should split them by , 
@@ -530,6 +714,7 @@ namespace jf
                                     this.allErrorsText[10] = String.Format("'{0}' value is not number in data, its should be number", s);
                                 }
                                 this.errors.Add(new CustomError(lineNumber, this.allErrorsText[10]));
+                                break;
                             }
                             constValue.Add(double.Parse(s));
                         }
@@ -548,30 +733,30 @@ namespace jf
             }
             #endregion
 
-            // TODO: performable errors are not complete and we should complete it
+            
             #region Detect Errors in Performable Part Of Code
             else
             {
-                switch (identifierAndAttribute[0].ToLower()){
+                switch (identifierAndAttribute[0].ToLower()) {
 
                     #region var Keyword Errors
                     case "var":
 
                         /* var keyword have 2 attribute that are seperated by ,
-                         * we should split them by ,
-                         */
+                            * we should split them by ,
+                            */
                         string[] temp = identifierAndAttribute[1].Split(',');
 
                         // var keyword have 2 attribute, more than 2 attribute is an error
-                        if (temp.Length > 2)
+                        if (temp.Length != 2)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[14]));
                             break;
                         }
 
                         /* first attribute is name of varibale and name of varibale cant start 
-                         * with number. if it start with number we have an error
-                         */
+                            * with number. if it start with number we have an error
+                            */
                         if (!Char.IsLetter(temp[0][0]))
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[15]));
@@ -579,8 +764,8 @@ namespace jf
                         }
 
                         /* second attribute is value of variable and it should be a number
-                         * if we cant parse it to number we have an error
-                         */
+                            * if we cant parse it to number we have an error
+                            */
                         double number;
                         if (double.TryParse(temp[1], out number) == false)
                         {
@@ -597,8 +782,8 @@ namespace jf
                     case "read":
 
                         /* read keyword just have one attribute, if length of identifierAndAttribute is
-                         * one, its means that we have an error
-                         */
+                            * one, its means that we have an error
+                            */
                         if (identifierAndAttribute.Length == 1)
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[17]));
@@ -606,8 +791,8 @@ namespace jf
                         }
 
                         /* attribute of read keyword should be name of a variable
-                         * we check it 
-                         */
+                            * we check it 
+                            */
                         bool isItInDefined = false;
                         foreach (Tuple<string, double> t in this.variables)
                         {
@@ -640,6 +825,17 @@ namespace jf
 
                     #region add Keyword Errors
                     case "add":
+
+                        /* add keyword has a list of objects (this list has 2 value, first one should 
+                         * be a variable and second one can be variable or number) and this list is 
+                         * seperated from add keyword with one blank space, if there is no list of 
+                         * objects its an error and we check it here
+                         */
+                        if (identifierAndAttribute.Length != 2 || identifierAndAttribute[1] == null)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[23]));
+                            break;
+                        }
 
                         /* add keyword has 2 attribute that are seperated by ,
                          * we should split it by ,
@@ -710,10 +906,19 @@ namespace jf
                     #region set Keyword Errors
                     case "set":
 
+                        /* set keyword has a  value and this value is seperated from set keyword 
+                         * with one blank space, if there is no value its an error and we check it here
+                         */
+                        if (identifierAndAttribute.Length != 2 || identifierAndAttribute[1] == null)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[24]));
+                            break;
+                        }
+
                         /* set keyword has one attribute and it should be pp or pm
                          * otherwise we have an error
                          */
-                        if(identifierAndAttribute[1].ToLower() != "pp" && identifierAndAttribute[1].ToLower() != "pm")
+                        if (identifierAndAttribute[1].ToLower() != "pp" && identifierAndAttribute[1].ToLower() != "pm")
                         {
                             this.errors.Add(new CustomError(lineNumber, this.allErrorsText[20]));
                         }
@@ -722,9 +927,394 @@ namespace jf
 
                     #region speed Keyword Errors
                     case "speed":
+                        temp = identifierAndAttribute[1].Split(',');
+                        /* speed attribute can be 1 or 2, if we have more attribute
+                         * we have an error
+                         */
+                        if (temp.Length > 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[34]));
+                            break;
+                        }
+
+                        // speed flag is 'c', other flags are illegal and we have an error
+                        if (temp[1].ToLower() != "c")
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[35]));
+                            break;
+                        }
+                        identifierAndAttribute[1] = identifierAndAttribute[1].Replace(",c", "");
+
+                        /* speed keyword has a value and this value is seperated from speed keyword 
+                         * with one blank space, if there is no value its an error and we check it here
+                         */
+                        if (identifierAndAttribute.Length != 2 || identifierAndAttribute[1] == null)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[25]));
+                            break;
+                        }
+
+                        /* attribute can be variable or number, first we check if first letter of it
+                         * not be alphabet, so its a number and we should be able to parse it to number
+                         * if we cant do that we have an error
+                         */
                         if (!Char.IsLetter(identifierAndAttribute[1][0]))
                         {
+                            if (double.TryParse(identifierAndAttribute[1], out number) == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[26]));
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            /* if first letter of second attribute is not number, its a variable
+                             * so we should be able to find it in our list of variables
+                             * otherwise we have an error
+                             */
+                            isItInDefined = false;
+                            foreach (Tuple<string, double> t in this.variables)
+                            {
+                                if (t.Item1 == identifierAndAttribute[1])
+                                {
+                                    isItInDefined = true;
+                                    break;
+                                }
+                            }
+                            if (isItInDefined == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[18]));
+                                break;
+                            }
+                        }
+                        break;
+                    #endregion
 
+                    #region break Keyword Errors
+                    case "brake":
+
+                        /* brake keyword has a value and this value is seperated from brake keyword 
+                         * with one blank space, if there is no value its an error and we check it here
+                         */
+                        if (identifierAndAttribute.Length != 2 || identifierAndAttribute[1] == null)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[27]));
+                            break;
+                        }
+
+                        temp = identifierAndAttribute[1].Split(',');
+
+                        /* check if brake has flag, if flag exist it should be r charactar
+                         * otherwise its an error
+                         */
+                        if (temp.Length == 3)
+                        {
+                            if (temp[2] != "r")
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[28]));
+                                break;
+                            }
+                        }
+
+                        /* brake work with constant moment or constant pressure
+                         * so its should start with 'p' or 'm', if not we have an error
+                         */
+                        if (!(temp[0][0] == 'p' || temp[0][0] == 'm'))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[29]));
+                            break;
+                        }
+
+                        /* after 'p' or 'm' character we should have '=' character,
+                         * if not we have an error
+                         */
+                        if (temp[0][1] != '=')
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[30]));
+                            break;
+                        }
+
+                        /* after '=' character, we should have a number or variable,
+                         * we check it and if we dont have them we have an error
+                         */
+                        if (temp[0][0] == 'p')
+                        {
+                            temp[0] = temp[0].Replace("p=", "");
+                        }
+                        else
+                        {
+                            temp[0] = temp[0].Replace("m=", "");
+                        }
+                        temp[0] = temp[0].Trim();
+                        if (!Char.IsLetter(temp[0][0]))
+                        {
+                            if (double.TryParse(temp[0], out number) == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[31]));
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            /* if first letter is not number, its a variable
+                             * so we should be able to find it in our list of variables
+                             * otherwise we have an error
+                             */
+                            isItInDefined = false;
+                            foreach (Tuple<string, double> t in this.variables)
+                            {
+                                if (t.Item1 == temp[0])
+                                {
+                                    isItInDefined = true;
+                                    break;
+                                }
+                            }
+                            if (isItInDefined == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[31]));
+                                break;
+                            }
+                        }
+
+                        /* second value in attribute should be start with UNTIL or until
+                         * if it doesn't start with that we have an error
+                         */
+                        temp[1] = temp[1].ToLower();
+                        if (!temp[1].StartsWith("until"))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[32]));
+                            break;
+                        }
+
+                        /* after 'until' keyword we should have a condition
+                         * if we dont have condition we have an error
+                         */
+                        temp[1] = temp[1].Replace("until", "");
+                        temp[1] = temp[1].Trim();
+                        if (!this.checkForConditionError(temp[1]))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[33]));
+                            break;
+                        }
+                        break;
+                    #endregion
+
+                    #region wait Keyword Errors
+                    case "wait":
+
+                        /* if identifier is wait keywords, its just have one attribute so length of 
+                         * identifierAndAttribute should be 2. if it be more than 2, its an error 
+                         */
+                        string[] temp1 = identifierAndAttribute[1].Split(',');
+                        if (temp1.Length > 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+
+                        // check condition of wait with checkForConditionError method
+                        if (!this.checkForConditionError(identifierAndAttribute[1]))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[36]));
+                            break;
+                        }
+                        break;
+                    #endregion
+
+                    #region stop Keyword Errors
+                    case "stop":
+                        // stop keyword has no attribute, if it has attribute we have an error
+                        if (identifierAndAttribute.Length != 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+                        break;
+                    #endregion
+
+                    #region loop Keyword Errors
+                    case "loop":
+                        // loop keyword has no attribute, if it has attribute we have an error
+                        string[] temp2 = identifierAndAttribute[1].Split(',');
+                        if (temp2.Length > 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+                        
+                        /* attribute can be variable or number, first we check if first letter of it
+                         * not be alphabet, so its a number and we should be able to parse it to number
+                         * if we cant do that we have an error
+                         */
+                        if (!Char.IsLetter(identifierAndAttribute[1][0]))
+                        {
+                            if (double.TryParse(identifierAndAttribute[1], out number) == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[37]));
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            /* if first letter of attribute is not number, its a variable
+                             * so we should be able to find it in our list of variables
+                             * otherwise we have an error
+                             */
+                            isItInDefined = false;
+                            foreach (Tuple<string, double> t in this.variables)
+                            {
+                                if (t.Item1 == identifierAndAttribute[1])
+                                {
+                                    isItInDefined = true;
+                                    break;
+                                }
+                            }
+                            if (isItInDefined == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[37]));
+                                break;
+                            }
+                        }
+                        break;
+                    #endregion
+
+                    #region lend Keyword Errors
+                    case "lend":
+                        // loop keyword has no attribute, if it has attribute we have an error
+                        string[] temp3 = identifierAndAttribute[1].Split(',');
+                        if (temp3.Length > 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+
+                        /* if we have 2 attribute we should check both of them,
+                         * first one should be a number and second one should be a valid condition
+                         */
+                        if (temp3.Length == 2)
+                        {
+                            if (double.TryParse(temp3[0], out number) == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[38]));
+                                break;
+                            }
+                            temp3[1] = temp3[1].ToLower().Replace("while", "");
+                            if (!checkForConditionError(temp3[1]))
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[39]));
+                                break;
+                            }
+                        }
+
+                        /* if our attribute contains while keyword we have a loop with condition
+                         * and we check its condition
+                         */
+                        else if (identifierAndAttribute[1].ToLower().Contains("while"))
+                        {
+                            if(!this.checkForConditionError(identifierAndAttribute[1].ToLower().Replace("while", "").Trim())){
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[39]));
+                                break;
+                            }
+                        }
+
+                        // if our attribute is a number we should check that its a valid number
+                        else if (identifierAndAttribute.Length == 2)
+                        {
+                            if (double.TryParse(identifierAndAttribute[1], out number) == false)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[38]));
+                                break;
+                            }
+                        }
+                        break;
+                    #endregion
+
+                    #region if Keyword Errors
+                    case "if":
+                        // if keyword has one attribute, if it has more attribute we have an error
+                        if (identifierAndAttribute.Length != 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+                        string[] temp4 = identifierAndAttribute[1].Split(',');
+                        if (temp4.Length > 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+
+                        /* attribute of if keyword is a condition so we check this condition
+                         * to be a valid condition
+                         */
+                        if (!this.checkForConditionError(identifierAndAttribute[1]))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[40]));
+                            break;
+                        }
+                        break;
+                    #endregion
+
+                    #region endif Keyword Errors
+                    case "endif":
+                        // endif keyword has no attribute, if it has attribute we have an error
+                        if (identifierAndAttribute.Length != 1)
+                        {
+                            if (identifierAndAttribute[1] != null)
+                            {
+                                this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                                break;
+                            }
+                        }
+                        break;
+                    #endregion
+
+                    #region water Keyword Errors
+                    case "water":
+                        // water keyword has just one attribute, if it has attribute we have an error
+                        if(identifierAndAttribute.Length != 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+                        string[] temp5 = identifierAndAttribute[1].Split(',');
+                        if (temp5.Length > 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+                        /* attribute of water should be a number and its just can be 
+                         * 0 or 1, otherwise we have an error
+                         */
+                        if (!(identifierAndAttribute[1] == "0" || identifierAndAttribute[1] == "1"))
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[41]));
+                            break;
+                        }
+                        break;
+
+                    #endregion
+
+                    #region fan Keyword Errors
+                    case "fan":
+                        // fan keyword has just one attribute, if it has attribute we have an error
+                        if (identifierAndAttribute.Length != 2)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+                        string[] temp6 = identifierAndAttribute[1].Split(',');
+                        if (temp6.Length > 1)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[100]));
+                            break;
+                        }
+
+                        // attribute of fan is a number, we check it here
+                        if (double.TryParse(identifierAndAttribute[1], out number) == false)
+                        {
+                            this.errors.Add(new CustomError(lineNumber, this.allErrorsText[38]));
+                            break;
                         }
                         break;
                     #endregion
@@ -747,7 +1337,7 @@ namespace jf
             /* if startLineNumber is null or its values are less than 0, its means that there is no
              * begin keyword in code and we have an error
              */
-            if (startLineNumber == null || startLineNumber.Item1 < 0)
+                        if (startLineNumber == null || startLineNumber.Item1 < 0)
             {
                 this.errors.Add(new CustomError(startLineNumber.Item1, this.allErrorsText[5]));
             }
