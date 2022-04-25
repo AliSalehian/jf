@@ -302,6 +302,11 @@ namespace jf
                 this.commands.Enqueue(new Command("highlight", error.getLineNumber(), this.RED));
             }
 
+            if (errorDetected)
+            {
+                return 0;
+            }
+
             #region Run Explanation Part Of Code
             /* iterate explanation part of code and run it line by line
              * if compiler find any error in code, this loop will not run

@@ -56,15 +56,25 @@ namespace WindowsFormsApp1
 
             while (true)
             {
-                if(Program.fileNames.Count != 0)
-                {
-                    compiler.compile(Program.fileNames[0], queue);
-                    jf.Runner runner = new jf.Runner(Program.compiler, queue, sensorHandler);
-                    runner.run();
-                    Program.fileNames.RemoveAt(0);
-                    jf.Command clearTextBox = new jf.Command("delete ritchbox");
-                    Program.queue.Enqueue(clearTextBox);
-                }
+                run_runner:
+                    if(Program.fileNames.Count != 0)
+                    {
+                        compiler.compile(Program.fileNames[0], queue);
+                        jf.Runner runner = new jf.Runner(Program.compiler, queue, sensorHandler);
+                        int runCompletedWithoutError = runner.run();
+                        if (runCompletedWithoutError == 0)
+                        {
+                            Program.fileNames.RemoveAt(0);
+                            goto run_runner;
+                        }
+                        Program.fileNames.RemoveAt(0);
+                        if (Program.fileNames.Count == 0)
+                        {
+                            goto run_runner;
+                        }
+                        jf.Command clearTextBox = new jf.Command("delete ritchbox");
+                        Program.queue.Enqueue(clearTextBox);
+                    }
             }
         }
         #endregion
